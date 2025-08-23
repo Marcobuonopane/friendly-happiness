@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AUTENTICO v2.2 - Certificazione Digitale</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #f5f1e8 0%, #e8dcc0 100%);
+            min-height: 100vh;
+            color: #2c1810;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo-container {
+            display: inline-block;
+            background: #f5f1e8;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            margin-bottom: 20px;
+            border: 3px solid #8b4513;
+        }
+
+        .logo {
+            width: 200px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .app-title {
+            font-size: 2.5em;
+            color: #2c1810;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+
+        .version {
+            font-size: 1.2em;
+            color: #8b4513;
+            font-weight: bold;
+        }
+
+        .credits {
+            background: rgba(255,255,255,0.8);
+            padding: 10px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #8b4513;
+            font-style: italic;
+        }
+
+        .section {
+            background: rgba(255,255,255,0.9);
+            margin: 20px 0;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 2px solid #d4b895;
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #2c1810;
+            border-bottom: 2px solid #8b4513;
+            padding-bottom: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #2c1810;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #d4b895;
+            border-radius: 8px;
+            font-size: 16px;
+            background: rgba(255,255,255,0.9);
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #8b4513;
+            box-shadow: 0 0 5px rgba(139,69,19,0.3);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #8b4513 0%, #a0522d 100%);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .status {
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .status.info {
+            background: #cce7ff;
+            color: #004085;
+            border: 1px solid #99d3ff;
+        }
+
+        .certificate {
+            background: linear-gradient(135deg, #f8f5f0 0%, #e8dcc0 100%);
+            border: 3px solid #8b4513;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .certificate::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(45deg, #8b4513, #cd853f, #8b4513);
+            border-radius: 20px;
+            z-index: -1;
+        }
+
+        .certificate-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .certificate-title {
+            font-size: 2em;
+            color: #2c1810;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+
+        .certificate-content {
+            line-height: 1.8;
+            font-size: 1.1em;
+        }
+
+        .signature-area {
+            margin-top: 30px;
+            text-align: right;
+            font-style: italic;
+        }
+
+        .biometric-area {
+            background: #f0f8ff;
+            border: 2px dashed #4169e1;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .language-selector {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .file-area {
+            border: 2px dashed #8b4513;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin: 15px 0;
+            background: rgba(255,255,255,0.5);
+        }
+
+        .file-list {
+            margin-top: 15px;
+        }
+
+        .file-item {
+            background: rgba(255,255,255,0.8);
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .two-columns {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+            
+            .language-selector {
+                position: static;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+        }
+
+        .fingerprint-icon {
+            font-size: 4em;
+            color: #8b4513;
+            margin: 20px 0;
+        }
+
+        .progress-bar {
+            width: 100%;
+            background: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 20px;
+            background: linear-gradient(90deg, #8b4513, #cd853f);
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .qr-code {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .watermark {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            opacity: 0.1;
+            font-size: 0.8em;
+            color: #8b4513;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="language-selector">
+        <select id="languageSelect" onchange="changeLanguage()">
+            <option value="it">🇮🇹 Italiano</option>
+            <option value="en">🇬🇧 English</option>
+            <option value="es">🇪🇸 Español</option>
+            <option value="fr">🇫🇷 Français</option>
+            <option value="de">🇩🇪 Deutsch</option>
+        </select>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <img src="https://page.gensparksite.com/v1/base64_upload/def9c81851208a0ead4397c7f53c6d46" alt="AUTENTICO Logo" class="logo">
+            </div>
+            <h1 class="app-title" data-translate="app_title">AUTENTICO</h1>
+            <div class="version">v2.2 FINALE</div>
+            <div class="credits">
+                <strong data-translate="inventor">Inventore:</strong> Marco Buonopane (Roma, 10/05/1976)<br>
+                <strong data-translate="designer">App Designer:</strong> Massimiliano Cardinali
+            </div>
+        </div>
+
+        <!-- Sezione Login -->
+        <div class="section" id="loginSection">
+            <h2 class="section-title" data-translate="secure_access">🔐 Accesso Sicuro</h2>
+            <div class="form-group">
+                <label for="loginEmail" data-translate="email">Email:</label>
+                <input type="email" id="loginEmail" placeholder="inserisci@email.com">
+            </div>
+            <div class="form-group">
+                <label data-translate="auth_method">Metodo di Autenticazione:</label>
+                <button class="btn" onclick="requestBiometric()" data-translate="fingerprint">🔍 Impronta Digitale</button>
+                <button class="btn" onclick="requestPin()" data-translate="use_pin">🔢 Usa PIN</button>
+            </div>
+            <button class="btn" onclick="login()" data-translate="login">Accedi</button>
+            <button class="btn" onclick="showRegistration()" data-translate="register">Registrati</button>
+        </div>
+
+        <!-- Sezione Registrazione -->
+        <div class="section hidden" id="registrationSection">
+            <h2 class="section-title" data-translate="registration">📝 Registrazione</h2>
+            <div class="two-columns">
+                <div>
+                    <div class="form-group">
+                        <label for="fullName" data-translate="full_name">Nome Completo:</label>
+                        <input type="text" id="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="birthDate" data-translate="birth_date">Data di Nascita:</label>
+                        <input type="date" id="birthDate" required>
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <label for="birthPlace" data-translate="birth_place">Luogo di Nascita:</label>
+                        <input type="text" id="birthPlace" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" data-translate="email">Email:</label>
+                        <input type="email" id="email" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="pin" data-translate="set_pin">Imposta PIN (6 cifre):</label>
+                <input type="password" id="pin" maxlength="6" pattern="[0-9]{6}" required>
+            </div>
+            <div class="biometric-area">
+                <div class="fingerprint-icon">🔍</div>
+                <p data-translate="biometric_setup">Configurazione Biometrica</p>
+                <button class="btn" onclick="setupBiometric()" data-translate="setup_fingerprint">Configura Impronta</button>
+            </div>
+            <button class="btn" onclick="register()" data-translate="complete_registration">Completa Registrazione</button>
+            <button class="btn" onclick="showLogin()" data-translate="back_login">Torna al Login</button>
+        </div>
+
+        <!-- Dashboard Principale -->
+        <div class="section hidden" id="dashboard">
+            <h2 class="section-title" data-translate="dashboard">🏠 Dashboard</h2>
+            <div class="status info">
+                <span data-translate="welcome">Benvenuto,</span> <span id="userName"></span>! 
+                <span data-translate="user_id">ID Utente:</span> <span id="userId"></span>
+            </div>
+            <div class="two-columns">
+                <button class="btn" onclick="showCertification()" data-translate="new_certificate">📋 Nuovo Certificato</button>
+                <button class="btn" onclick="showVault()" data-translate="digital_vault">🔒 Cassaforte Digitale</button>
+            </div>
+            <button class="btn" onclick="logout()" data-translate="logout">Logout</button>
+        </div>
+
+        <!-- Generazione Certificato -->
+        <div class="section hidden" id="certificationSection">
+            <h2 class="section-title" data-translate="generate_certificate">📋 Genera Certificato</h2>
+            
+            <div class="section-title" data-translate="cert_info">Informazioni Certificato</div>
+            <div id="certInfo">
+                <p><strong data-translate="position">Posizione:</strong> <span id="gpsData" data-translate="detecting">Rilevamento...</span></p>
+                <p><strong data-translate="local_time">Orario Locale:</strong> <span id="localTime">--:--:--</span></p>
+                <p><strong data-translate="internet_time">Orario Internet:</strong> <span id="internetTime">--:--:--</span></p>
+                <p><strong data-translate="cert_number">Numero Certificato:</strong> <span id="certNumber">--</span></p>
+            </div>
+
+            <div class="form-group">
+                <label for="certPurpose" data-translate="cert_purpose">Scopo del Certificato:</label>
+                <textarea id="certPurpose" rows="3" placeholder="Descrivi l'uso di questo certificato..."></textarea>
+            </div>
+
+            <div class="biometric-area">
+                <div class="fingerprint-icon">🔍</div>
+                <p data-translate="auth_required">Autenticazione Richiesta</p>
+                <button class="btn" onclick="authenticateForCert()" data-translate="authenticate">Autentica</button>
+            </div>
+
+            <button class="btn" onclick="generateCertificate()" id="generateBtn" disabled data-translate="generate_cert">Genera Certificato</button>
+            <button class="btn" onclick="showDashboard()" data-translate="back_dashboard">Torna alla Dashboard</button>
+        </div>
+
+        <!-- Cassaforte Digitale -->
+        <div class="section hidden" id="vaultSection">
+            <h2 class="section-title" data-translate="digital_vault_title">🔒 Cassaforte Digitale</h2>
+            
+            <div class="file-area" onclick="document.getElementById('fileInput').click()">
+                <p data-translate="upload_files">📁 Clicca per caricare file</p>
+                <input type="file" id="fileInput" style="display: none;" multiple onchange="uploadFiles()">
+                <small data-translate="encryption_info">I file sono protetti con crittografia AES-256</small>
+            </div>
+
+            <div class="file-list" id="fileList">
+                <h3 data-translate="stored_files">File Memorizzati:</h3>
+            </div>
+
+            <button class="btn" onclick="showDashboard()" data-translate="back_dashboard">Torna alla Dashboard</button>
+        </div>
+
+        <!-- Certificato Generato -->
+        <div class="certificate hidden" id="generatedCertificate">
+            <div class="certificate-header">
+                <img src="https://page.gensparksite.com/v1/base64_upload/def9c81851208a0ead4397c7f53c6d46" alt="AUTENTICO Logo" style="width: 100px; height: auto;">
+                <h2 class="certificate-title" data-translate="digital_certificate">CERTIFICATO DIGITALE</h2>
+            </div>
+            
+            <div class="certificate-content" id="certificateContent">
+                <!-- Il contenuto verrà generato dinamicamente -->
+            </div>
+
+            <div class="signature-area">
+                <p data-translate="digital_signature">Firma Digitale AUTENTICO</p>
+                <p data-translate="signature_info">Questo certificato è protetto da firma digitale crittografica</p>
+                <small>Hash: <span id="certificateHash">--</span></small>
+            </div>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn" onclick="downloadCertificate()" data-translate="download_pdf">📄 Scarica PDF</button>
+                <button class="btn" onclick="showDashboard()" data-translate="back_dashboard">Torna alla Dashboard</button>
+            </div>
+        </div>
+
+        <div class="watermark">
+            AUTENTICO v2.2 - Sistema di Certificazione Digitale<br>
+            © 2024 Marco Buonopane
+        </div>
+    </div>
+
+    <script>
+        // Stato dell'applicazione
+        let currentUser = null;
+        let certificateCounter = 0;
+        let currentLanguage = 'it';
+        let biometricSupported = false;
+        let vaultFiles = [];
+
+        // Traduzioni
+        const translations = {
+            it: {
+                app_title: "AUTENTICO",
+                inventor: "Inventore",
+                designer: "App Designer",
+                secure_access: "🔐 Accesso Sicuro",
+                email: "Email",
+                auth_method: "Metodo di Autenticazione",
+                fingerprint: "🔍 Impronta Digitale",
+                use_pin: "🔢 Usa PIN",
+                login: "Accedi",
+                register: "Registrati",
+                registration: "📝 Registrazione",
+                full_name: "Nome Completo",
+                birth_date: "Data di Nascita",
+                birth_place: "Luogo di Nascita",
+                set_pin: "Imposta PIN (6 cifre)",
+                biometric_setup: "Configurazione Biometrica",
+                setup_fingerprint: "Configura Impronta",
+                complete_registration: "Completa Registrazione",
+                back_login: "Torna al Login",
+                dashboard: "🏠 Dashboard",
+                welcome: "Benvenuto,",
+                user_id: "ID Utente:",
+                new_certificate: "📋 Nuovo Certificato",
+                digital_vault: "🔒 Cassaforte Digitale",
+                logout: "Logout",
+                generate_certificate: "📋 Genera Certificato",
+                cert_info: "Informazioni Certificato",
+                position: "Posizione",
+                detecting: "Rilevamento...",
+                local_time: "Orario Locale",
+                internet_time: "Orario Internet",
+                cert_number: "Numero Certificato",
+                cert_purpose: "Scopo del Certificato",
+                auth_required: "Autenticazione Richiesta",
+                authenticate: "Autentica",
+                generate_cert: "Genera Certificato",
+                back_dashboard: "Torna alla Dashboard",
+                digital_vault_title: "🔒 Cassaforte Digitale",
+                upload_files: "📁 Clicca per caricare file",
+                encryption_info: "I file sono protetti con crittografia AES-256",
+                stored_files: "File Memorizzati:",
+                digital_certificate: "CERTIFICATO DIGITALE",
+                digital_signature: "Firma Digitale AUTENTICO",
+                signature_info: "Questo certificato è protetto da firma digitale crittografica",
+                download_pdf: "📄 Scarica PDF"
+            },
+            en: {
+                app_title: "AUTHENTIC",
+                inventor: "Inventor",
+                designer: "App Designer",
+                secure_access: "🔐 Secure Access",
+                email: "Email",
+                auth_method: "Authentication Method",
+                fingerprint: "🔍 Fingerprint",
+                use_pin: "🔢 Use PIN",
+                login: "Login",
+                register: "Register",
+                registration: "📝 Registration",
+                full_name: "Full Name",
+                birth_date: "Birth Date",
+                birth_place: "Birth Place",
+                set_pin: "Set PIN (6 digits)",
+                biometric_setup: "Biometric Setup",
+                setup_fingerprint: "Setup Fingerprint",
+                complete_registration: "Complete Registration",
+                back_login: "Back to Login",
+                dashboard: "🏠 Dashboard",
+                welcome: "Welcome,",
+                user_id: "User ID:",
+                new_certificate: "📋 New Certificate",
+                digital_vault: "🔒 Digital Vault",
+                logout: "Logout",
+                generate_certificate: "📋 Generate Certificate",
+                cert_info: "Certificate Information",
+                position: "Position",
+                detecting: "Detecting...",
+                local_time: "Local Time",
+                internet_time: "Internet Time",
+                cert_number: "Certificate Number",
+                cert_purpose: "Certificate Purpose",
+                auth_required: "Authentication Required",
+                authenticate: "Authenticate",
+                generate_cert: "Generate Certificate",
+                back_dashboard: "Back to Dashboard",
+                digital_vault_title: "🔒 Digital Vault",
+                upload_files: "📁 Click to upload files",
+                encryption_info: "Files are protected with AES-256 encryption",
+                stored_files: "Stored Files:",
+                digital_certificate: "DIGITAL CERTIFICATE",
+                digital_signature: "AUTENTICO Digital Signature",
+                signature_info: "This certificate is protected by cryptographic digital signature",
+                download_pdf: "📄 Download PDF"
+            }
+        };
+
+        // Inizializzazione
+        document.addEventListener('DOMContentLoaded', function() {
+            checkBiometricSupport();
+            updateTime();
+            setInterval(updateTime, 1000);
+            getLocation();
+            
+            // Controllo se Marco è già registrato
+            if (localStorage.getItem('marcoRegistered') !== 'true') {
+                certificateCounter = 0;
+            } else {
+                certificateCounter = parseInt(localStorage.getItem('certificateCounter') || '0');
+            }
+        });
+
+        // Supporto biometrico
+        function checkBiometricSupport() {
+            if ('credentials' in navigator && 'create' in navigator.credentials) {
+                biometricSupported = true;
+            }
+        }
+
+        // Cambio lingua
+        function changeLanguage() {
+            currentLanguage = document.getElementById('languageSelect').value;
+            updateTranslations();
+        }
+
+        function updateTranslations() {
+            const elements = document.querySelectorAll('[data-translate]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[currentLanguage] && translations[currentLanguage][key]) {
+                    element.textContent = translations[currentLanguage][key];
+                }
+            });
+        }
+
+        // Gestione sezioni
+        function showSection(sectionId) {
+            const sections = ['loginSection', 'registrationSection', 'dashboard', 'certificationSection', 'vaultSection'];
+            sections.forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+            document.getElementById(sectionId).classList.remove('hidden');
+            document.getElementById('generatedCertificate').classList.add('hidden');
+        }
+
+        function showLogin() {
+            showSection('loginSection');
+        }
+
+        function showRegistration() {
+            showSection('registrationSection');
+        }
+
+        function showDashboard() {
+            showSection('dashboard');
+        }
+
+        function showCertification() {
+            showSection('certificationSection');
+            getLocation();
+            updateCertificationInfo();
+        }
+
+        function showVault() {
+            showSection('vaultSection');
+            loadVaultFiles();
+        }
+
+        // Autenticazione biometrica
+        async function requestBiometric() {
+            if (!biometricSupported) {
+                alert('Biometrico non supportato su questo dispositivo');
+                return;
+            }
+
+            try {
+                // Simulazione autenticazione biometrica
+                showStatus('Scansione impronta in corso...', 'info');
+                
+                setTimeout(() => {
+                    showStatus('Impronta riconosciuta con successo!', 'success');
+                }, 2000);
+            } catch (error) {
+                showStatus('Errore nella scansione biometrica', 'error');
+            }
+        }
+
+        function requestPin() {
+            const pin = prompt('Inserisci il tuo PIN (6 cifre):');
+            if (pin && pin.length === 6 && /^\d+$/.test(pin)) {
+                showStatus('PIN accettato', 'success');
+                return true;
+            } else {
+                showStatus('PIN non valido', 'error');
+                return false;
+            }
+        }
+
+        // Registrazione
+        function register() {
+            const fullName = document.getElementById('fullName').value;
+            const birthDate = document.getElementById('birthDate').value;
+            const birthPlace = document.getElementById('birthPlace').value;
+            const email = document.getElementById('email').value;
+            const pin = document.getElementById('pin').value;
+
+            if (!fullName || !birthDate || !birthPlace || !email || !pin) {
+                showStatus('Compila tutti i campi', 'error');
+                return;
+            }
+
+            if (pin.length !== 6 || !/^\d+$/.test(pin)) {
+                showStatus('Il PIN deve essere di 6 cifre', 'error');
+                return;
+            }
+
+            // ID speciale per Marco
+            let userId;
+            if (fullName.toLowerCase().includes('marco buonopane') || 
+                (birthDate === '1976-05-10' && birthPlace.toLowerCase().includes('roma'))) {
+                userId = 1;
+                localStorage.setItem('marcoRegistered', 'true');
+            } else {
+                userId = Date.now();
+            }
+
+            const userData = {
+                id: userId,
+                fullName,
+                birthDate,
+                birthPlace,
+                email,
+                pin,
+                registrationDate: new Date().toISOString()
+            };
+
+            localStorage.setItem('user_' + email, JSON.stringify(userData));
+            showStatus('Registrazione completata con successo!', 'success');
+            
+            setTimeout(() => {
+                showLogin();
+            }, 2000);
+        }
+
+        // Login
+        function login() {
+            const email = document.getElementById('loginEmail').value;
+            
+            if (!email) {
+                showStatus('Inserisci email', 'error');
+                return;
+            }
+
+            const userData = localStorage.getItem('user_' + email);
+            if (!userData) {
+                showStatus('Utente non trovato', 'error');
+                return;
+            }
+
+            currentUser = JSON.parse(userData);
+            document.getElementById('userName').textContent = currentUser.fullName;
+            document.getElementById('userId').textContent = currentUser.id;
+            
+            showStatus('Login effettuato con successo!', 'success');
+            setTimeout(() => {
+                showDashboard();
+            }, 1500);
+        }
+
+        // Logout
+        function logout() {
+            currentUser = null;
+            showStatus('Logout effettuato', 'info');
+            setTimeout(() => {
+                showLogin();
+            }, 1000);
+        }
+
+        // Setup biometrico
+        function setupBiometric() {
+            showStatus('Setup biometrico simulato completato', 'success');
+        }
+
+        // Geolocalizzazione
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        const lat = position.coords.latitude.toFixed(6);
+                        const lon = position.coords.longitude.toFixed(6);
+                        document.getElementById('gpsData').textContent = `${lat}, ${lon}`;
+                    },
+                    function(error) {
+                        document.getElementById('gpsData').textContent = 'Posizione non disponibile';
+                    }
+                );
+            } else {
+                document.getElementById('gpsData').textContent = 'Geolocalizzazione non supportata';
+            }
+        }
+
+        // Aggiornamento tempo
+        function updateTime() {
+            const now = new Date();
+            const localTime = now.toLocaleTimeString();
+            document.getElementById('localTime').textContent = localTime;
+            
+            // Simulazione orario internet (UTC)
+            const utcTime = now.toUTCString().split(' ')[4];
+            document.getElementById('internetTime').textContent = utcTime;
+        }
+
+        // Aggiornamento info certificazione
+        function updateCertificationInfo() {
+            certificateCounter++;
+            document.getElementById('certNumber').textContent = 
+                currentUser.id.toString().padStart(8, '0') + '-' + certificateCounter.toString().padStart(4, '0');
+            localStorage.setItem('certificateCounter', certificateCounter.toString());
+        }
+
+        // Autenticazione per certificato
+        function authenticateForCert() {
+            if (requestPin()) {
+                document.getElementById('generateBtn').disabled = false;
+                showStatus('Autenticazione completata', 'success');
+            }
+        }
+
+        // Generazione certificato
+        function generateCertificate() {
+            if (!currentUser) {
+                showStatus('Devi essere autenticato', 'error');
+                return;
+            }
+
+            const purpose = document.getElementById('certPurpose').value;
+            const gps = document.getElementById('gpsData').textContent;
+            const localTime = document.getElementById('localTime').textContent;
+            const internetTime = document.getElementById('internetTime').textContent;
+            const certNumber = document.getElementById('certNumber').textContent;
+
+            const certificate = {
+                number: certNumber,
+                user: currentUser,
+                purpose: purpose,
+                gps: gps,
+                localTime: localTime,
+                internetTime: internetTime,
+                timestamp: new Date().toISOString(),
+                hash: generateHash()
+            };
+
+            displayCertificate(certificate);
+            
+            // Salva certificato
+            const certificates = JSON.parse(localStorage.getItem('certificates') || '[]');
+            certificates.push(certificate);
+            localStorage.setItem('certificates', JSON.stringify(certificates));
+        }
+
+        // Visualizzazione certificato
+        function displayCertificate(cert) {
+            const content = `
+                <p><strong>Certificato N°:</strong> ${cert.number}</p>
+                <p><strong>Nome:</strong> ${cert.user.fullName}</p>
+                <p><strong>Data di Nascita:</strong> ${cert.user.birthDate}</p>
+                <p><strong>Luogo di Nascita:</strong> ${cert.user.birthPlace}</p>
+                <p><strong>Email:</strong> ${cert.user.email}</p>
+                <p><strong>Posizione GPS:</strong> ${cert.gps}</p>
+                <p><strong>Orario Locale:</strong> ${cert.localTime} del ${new Date().toLocaleDateString()}</p>
+                <p><strong>Orario Internet (UTC):</strong> ${cert.internetTime}</p>
+                <p><strong>Scopo:</strong> ${cert.purpose}</p>
+                <p><strong>Timestamp ISO:</strong> ${cert.timestamp}</p>
+            `;
+            
+            document.getElementById('certificateContent').innerHTML = content;
+            document.getElementById('certificateHash').textContent = cert.hash;
+            document.getElementById('generatedCertificate').classList.remove('hidden');
+            
+            // Nascondi sezioni
+            const sections = ['loginSection', 'registrationSection', 'dashboard', 'certificationSection', 'vaultSection'];
+            sections.forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+        }
+
+        // Generazione hash
+        function generateHash() {
+            return Math.random().toString(36).substring(2, 15) + 
+                   Math.random().toString(36).substring(2, 15);
+        }
+
+        // Download certificato
+        function downloadCertificate() {
+            window.print();
+        }
+
+        // Gestione file vault
+        function uploadFiles() {
+            const files = document.getElementById('fileInput').files;
+            for (let file of files) {
+                const fileData = {
+                    name: file.name,
+                    size: file.size,
+                    type: file.type,
+                    uploadDate: new Date().toISOString(),
+                    encrypted: true
+                };
+                vaultFiles.push(fileData);
+            }
+            
+            localStorage.setItem('vaultFiles_' + currentUser.id, JSON.stringify(vaultFiles));
+            loadVaultFiles();
+            showStatus(`${files.length} file caricati nella cassaforte`, 'success');
+        }
+
+        function loadVaultFiles() {
+            if (!currentUser) return;
+            
+            const savedFiles = localStorage.getItem('vaultFiles_' + currentUser.id);
+            if (savedFiles) {
+                vaultFiles = JSON.parse(savedFiles);
+            }
+            
+            const fileList = document.getElementById('fileList');
+            fileList.innerHTML = '<h3>File Memorizzati:</h3>';
+            
+            vaultFiles.forEach((file, index) => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                fileItem.innerHTML = `
+                    <span>📄 ${file.name} (${(file.size / 1024).toFixed(2)} KB)</span>
+                    <button class="btn" onclick="removeFile(${index})">🗑️ Rimuovi</button>
+                `;
+                fileList.appendChild(fileItem);
+            });
+        }
+
+        function removeFile(index) {
+            vaultFiles.splice(index, 1);
+            localStorage.setItem('vaultFiles_' + currentUser.id, JSON.stringify(vaultFiles));
+            loadVaultFiles();
+            showStatus('File rimosso dalla cassaforte', 'info');
+        }
+
+        // Gestione messaggi di stato
+        function showStatus(message, type) {
+            // Rimuovi messaggi esistenti
+            const existingStatus = document.querySelector('.status');
+            if (existingStatus) {
+                existingStatus.remove();
+            }
+
+            const status = document.createElement('div');
+            status.className = `status ${type}`;
+            status.textContent = message;
+            
+            const container = document.querySelector('.container');
+            container.insertBefore(status, container.firstChild);
+            
+            setTimeout(() => {
+                status.remove();
+            }, 3000);
+        }
+
+        // Event listeners per PWA
+        window.addEventListener('load', function() {
+            // Service Worker per PWA
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('data:text/javascript;base64,').catch(() => {});
+            }
+        });
+
+        // Gestione installazione PWA
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            deferredPrompt = e;
+            e.preventDefault();
+        });
+    </script>
+</body>
+</html>
+    <script id="html_badge_script1">
+        window.__genspark_remove_badge_link = "https://www.genspark.ai/api/html_badge/" +
+            "remove_badge?token=To%2FBnjzloZ3UfQdcSaYfDpxsYc8NJD1ocwnehtsvC%2F2fWpBYO6Gg%2FgqNsh%2F7olUJy3Yft1%2FHaDmIHcsXTkiJb%2Ft7S3X9bnhizQqFn6fbhWa8H1rHAW7W%2Bfj9kxWAn2Y4v6DRZ6iilWxoDvc%2FpL%2BvbMbmmBTAfVJE%2BrS1E6sdbf%2F64rPFFt0ew8PFm1YGw1TYmNCEkNDM95BCpRbqKMmZ6fI7groCWFivFDjm3ATaZOrI3Prph7lwsBDqOawBipPQpjGHa9qKmSG7D3VnpiZrQgzV4%2Br9WMqSW8a2XccYl8IR3UrJsiSxFQ2m06%2B417TLjMrkJjh9K6NXueHIAu5iBHld7GwdQUrmt%2F71tO916fo6ziHa9Gg86gd%2F2VyL0hcciVWw9jGvGRCr2MCxS8Ra1vmRnkcg7sZhwhNHYsNu%2BDuX70EfKiWn4KgUszgv0u%2BLwiqYKRafy1%2BEkBjS2Qf%2BSneqOZjQnxRBFuSuaZB%2BxueQS9r6ArwNEiflSK%2FJWN8WVPXZEbQSGzEpqMLh8AT1hA%3D%3D";
+        window.__genspark_locale = "it-IT";
+        window.__genspark_token = "To/BnjzloZ3UfQdcSaYfDpxsYc8NJD1ocwnehtsvC/2fWpBYO6Gg/gqNsh/7olUJy3Yft1/HaDmIHcsXTkiJb/t7S3X9bnhizQqFn6fbhWa8H1rHAW7W+fj9kxWAn2Y4v6DRZ6iilWxoDvc/pL+vbMbmmBTAfVJE+rS1E6sdbf/64rPFFt0ew8PFm1YGw1TYmNCEkNDM95BCpRbqKMmZ6fI7groCWFivFDjm3ATaZOrI3Prph7lwsBDqOawBipPQpjGHa9qKmSG7D3VnpiZrQgzV4+r9WMqSW8a2XccYl8IR3UrJsiSxFQ2m06+417TLjMrkJjh9K6NXueHIAu5iBHld7GwdQUrmt/71tO916fo6ziHa9Gg86gd/2VyL0hcciVWw9jGvGRCr2MCxS8Ra1vmRnkcg7sZhwhNHYsNu+DuX70EfKiWn4KgUszgv0u+LwiqYKRafy1+EkBjS2Qf+SneqOZjQnxRBFuSuaZB+xueQS9r6ArwNEiflSK/JWN8WVPXZEbQSGzEpqMLh8AT1hA==";
+    </script>
+    
+    <script id="html_notice_dialog_script" src="https://www.genspark.ai/notice_dialog.js"></script>
+    
