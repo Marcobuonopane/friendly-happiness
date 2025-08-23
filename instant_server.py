@@ -21,8 +21,12 @@ class AutenticoHandler(http.server.SimpleHTTPRequestHandler):
         parsed_path = urlparse(self.path)
         path = parsed_path.path
         
-        # Route principale - serve la pagina di download
-        if path == '/' or path == '/download':
+        # Route principale - serve la dashboard di Marco
+        if path == '/' or path == '/dashboard':
+            self.path = '/MARCO_DASHBOARD.html'
+        
+        # Route per il download dell'app
+        elif path == '/download' or path == '/install':
             self.path = '/INSTANT_APP_DEPLOY.html'
         
         # Route per l'app principale
@@ -32,6 +36,14 @@ class AutenticoHandler(http.server.SimpleHTTPRequestHandler):
         # Route per la soluzione magica
         elif path == '/magic' or path == '/bypass':
             self.path = '/MAGIC_BYPASS_SOLUTION.html'
+        
+        # Route per il compilatore Google Play
+        elif path == '/compile' or path == '/compiler':
+            self.path = '/GOOGLE_PLAY_MAGIC_COMPILER.html'
+        
+        # Route per il bypass reale
+        elif path == '/hack' or path == '/real-bypass':
+            self.path = '/BYPASS_TESTING_REAL.html'
         
         # Route per il manifest PWA
         elif path == '/manifest.json':
@@ -92,9 +104,12 @@ def main():
     try:
         with socketserver.TCPServer(("0.0.0.0", PORT), AutenticoHandler) as httpd:
             print(f"✅ Server attivo su http://0.0.0.0:{PORT}")
-            print(f"🌐 Pagina principale: http://0.0.0.0:{PORT}/")
-            print(f"📱 App AUTENTICO: http://0.0.0.0:{PORT}/app")
-            print(f"🎯 Soluzione Magica: http://0.0.0.0:{PORT}/magic")
+            print(f"🎯 DASHBOARD MARCO: http://0.0.0.0:{PORT}/")
+            print(f"📱 App AUTENTICO: http://0.0.0.0:{PORT}/app") 
+            print(f"📥 Download/Install: http://0.0.0.0:{PORT}/download")
+            print(f"🎪 Compilatore Google Play: http://0.0.0.0:{PORT}/compile")
+            print(f"🔓 Bypass Reale: http://0.0.0.0:{PORT}/hack")
+            print(f"✨ Soluzione Magica: http://0.0.0.0:{PORT}/magic")
             print("🔄 Premi Ctrl+C per fermare il server")
             
             sys.stdout.flush()
