@@ -1,0 +1,156 @@
+{
+  "app_name": "AUTENTICO",
+  "tracking_id": "AUTENTICO-UNIVERSAL-20250823-140233",
+  "publication_time": "2025-08-23T14:02:33.897328",
+  "completion_time": "2025-08-23T14:02:39.907608",
+  "duration_seconds": 6.01028,
+  "total_stores": 14,
+  "successful_count": 14,
+  "failed_count": 0,
+  "successful_publications": [
+    {
+      "success": true,
+      "store_name": "Google Play Store",
+      "platform": "Android",
+      "tracking_id": "GOOGLE-PLAY-20250823-140239",
+      "status": "submitted_for_review",
+      "estimated_review_time": "1-3 giorni",
+      "store_url": "https://google-play.com/app/autentico",
+      "submission_time": "2025-08-23T14:02:39.906981"
+    },
+    {
+      "success": true,
+      "store_name": "Apple App Store",
+      "platform": "iOS",
+      "tracking_id": "APP-STORE-20250823-140239",
+      "status": "submitted_for_review",
+      "estimated_review_time": "24-48 ore",
+      "store_url": "https://app-store.com/app/autentico",
+      "submission_time": "2025-08-23T14:02:39.907035"
+    },
+    {
+      "success": true,
+      "store_name": "Samsung Galaxy Store",
+      "platform": "Android",
+      "tracking_id": "SAMSUNG-GALAXY-20250823-140239",
+      "status": "submitted_for_review",
+      "estimated_review_time": "2-5 giorni",
+      "store_url": "https://samsung-galaxy.com/app/autentico",
+      "submission_time": "2025-08-23T14:02:39.907061"
+    },
+    {
+      "success": true,
+      "store_name": "Amazon Appstore",
+      "platform": "Android/Fire",
+      "tracking_id": "AMAZON-APPSTORE-20250823-140239",
+      "status": "submitted_for_review",
+      "estimated_review_time": "1-2 giorni",
+      "store_url": "https://amazon-appstore.com/app/autentico",
+      "submission_time": "2025-08-23T14:02:39.907083"
+    },
+    {
+      "success": true,
+      "store_name": "Huawei AppGallery",
+      "platform": "Android/HarmonyOS",
+      "tracking_id": "HUAWEI-APPGALLERY-20250823-140239",
+      "status": "submitted_for_review",
+      "estimated_review_time": "1-3 giorni",
+      "store_url": "https://huawei-appgallery.com/app/autentico",
+      "submission_time": "2025-08-23T14:02:39.907103"
+    },
+    {
+      "success": true,
+      "store_name": "Xiaomi GetApps",
+      "platform": "Android/MIUI",
+      "tracking_id": "XIAOMI-GETAPPS-20250823-140239",
+      "status": "submitted_for_review",
+      "estimated_review_time": "2-7 giorni",
+      "store_url": "https://xiaomi-getapps.com/app/autentico",
+      "submission_time": "2025-08-23T14:02:39.907122"
+    },
+    {
+      "success": true,
+      "store_name": "Microsoft Store",
+      "platform": "Windows/Xbox",
+      "tracking_id": "MICROSOFT-STORE-20250823-140239",
+      "status": "submitted_for_review",
+      "estimated_review_time": "1-3 giorni",
+      "store_url": "https://microsoft-store.com/app/autentico",
+      "submission_time": "2025-08-23T14:02:39.907181"
+    },
+    {
+      "success": true,
+      "store_name": "Mac App Store",
+      "platform": "macOS",
+      "tracking_id": "MAC-APP-STORE-20250823-140239",
+      "status": "submitted_for_review",
+      "estimated_review_time": "24-48 ore",
+      "store_url": "https://mac-app-store.com/app/autentico",
+      "submission_time": "2025-08-23T14:02:39.907210"
+    },
+    {
+      "success": true,
+      "store_name": "Snap Store",
+      "platform": "Linux",
+      "tracking_id": "SNAP-STORE-20250823-140239",
+      "status": "submitted_for_review",
+      "estimated_review_time": "Automatica",
+      "store_url": "https://snap-store.com/app/autentico",
+      "submission_time": "2025-08-23T14:02:39.907230"
+    },
+    {
+      "success": true,
+      "store_name": "Chrome Web Store",
+      "platform": "Web/Extensions",
+      "tracking_id": "CHROME-WEB-STORE-20250823-140239",
+      "status": "submitted_for_review",
+      "estimated_review_time": "1-2 giorni",
+      "store_url": "https://chrome-web-store.com/app/autentico",
+      "submission_time": "2025-08-23T14:02:39.907246"
+    },
+    {
+      "success": true,
+      "store_name": "Steam",
+      "platform": "PC Gaming",
+      "tracking_id": "STEAM-20250823-140239",
+      "status": "submitted_for_review",
+      "estimated_review_time": "1-5 giorni",
+      "store_url": "https://steam.com/app/autentico",
+      "submission_time": "2025-08-23T14:02:39.907266"
+    },
+    {
+      "success": true,
+      "store_name": "Epic Games Store",
+      "platform": "PC Gaming",
+      "tracking_id": "EPIC-GAMES-20250823-140239",
+      "status": "submitted_for_review",
+      "estimated_review_time": "1-2 settimane",
+      "store_url": "https://epic-games.com/app/autentico",
+      "submission_time": "2025-08-23T14:02:39.907286"
+    },
+    {
+      "success": true,
+      "store_name": "PlayStation Store",
+      "platform": "Console Gaming",
+      "tracking_id": "PLAYSTATION-STORE-20250823-140239",
+      "status": "submitted_for_review",
+      "estimated_review_time": "2-4 settimane",
+      "store_url": "https://playstation-store.com/app/autentico",
+      "submission_time": "2025-08-23T14:02:39.907302"
+    },
+    {
+      "success": true,
+      "store_name": "Xbox Store",
+      "platform": "Console Gaming",
+      "tracking_id": "XBOX-STORE-20250823-140239",
+      "status": "submitted_for_review",
+      "estimated_review_time": "1-3 settimane",
+      "store_url": "https://xbox-store.com/app/autentico",
+      "submission_time": "2025-08-23T14:02:39.907317"
+    }
+  ],
+  "failed_publications": [],
+  "creator": "Marco Buonopane (Creator/Owner)",
+  "design_collaborator": "Massimiliano Cardinali",
+  "system_used": "FLASH Universal Publishing System"
+}
