@@ -293,12 +293,13 @@ AUTENTICO/
                     <div class="mb-4">
                         <i class="fas fa-user-circle text-6xl text-blue-600 mb-4"></i>
                         <h3 class="text-xl font-bold">Marco Buonopane</h3>
-                        <p class="text-gray-600 italic">Inventore & Lead Developer</p>
+                        <p class="text-gray-600 italic">🏆 Inventore & Proprietario | Lead Developer</p>
                     </div>
                     <div class="text-sm text-gray-700 space-y-1">
                         <p><i class="fas fa-map-marker-alt mr-2"></i>Roma, Italia</p>
                         <p><i class="fas fa-birthday-cake mr-2"></i>10/05/1976</p>
-                        <p><i class="fas fa-briefcase mr-2"></i>Creatore di applicazioni</p>
+                        <p><i class="fas fa-lightbulb mr-2"></i>Creatore originale di AUTENTICO</p>
+                        <p><i class="fas fa-code mr-2"></i>Architettura & Sviluppo completo</p>
                     </div>
                 </div>
                 
@@ -306,13 +307,20 @@ AUTENTICO/
                     <div class="mb-4">
                         <i class="fas fa-user-circle text-6xl text-purple-600 mb-4"></i>
                         <h3 class="text-xl font-bold">Massimiliano Cardinali</h3>
-                        <p class="text-gray-600 italic">App Designer & UX Specialist</p>
+                        <p class="text-gray-600 italic">🤝 Collaboratore Ufficiale | App Designer & UX Specialist</p>
                     </div>
                     <div class="text-sm text-gray-700 space-y-1">
-                        <p><i class="fas fa-palette mr-2"></i>Design Interface</p>
-                        <p><i class="fas fa-mobile-alt mr-2"></i>User Experience</p>
+                        <p><i class="fas fa-palette mr-2"></i>Design Interface & Branding</p>
+                        <p><i class="fas fa-mobile-alt mr-2"></i>User Experience Design</p>
                     </div>
                 </div>
+            </div>
+        </section>
+
+            <div class="mt-6 bg-blue-50 rounded-lg p-4 text-center border border-blue-200">
+                <p class="text-blue-800"><strong>🏆 OWNERSHIP & COLLABORATION</strong></p>
+                <p class="text-gray-700 mt-2"><strong>Marco Buonopane</strong> è l'inventore e proprietario esclusivo di AUTENTICO v2.2.</p>
+                <p class="text-gray-700"><strong>Massimiliano Cardinali</strong> contribuisce come collaboratore ufficiale specializzato in design e user experience.</p>
             </div>
         </section>
 
@@ -352,9 +360,12 @@ AUTENTICO/
                 <p class="text-xl"><strong>AUTENTICO v2.2</strong> - <em>Certificazione Digitale Sicura e Autenticazione Biometrica</em></p>
             </div>
             <div class="border-t border-gray-600 pt-4">
-                <p>© 2024 Marco Buonopane - Sviluppato con ❤️ in Italia 🇮🇹
+                <p>© 2024 **Marco Buonopane** (Inventore & Proprietario) - Sviluppato con ❤️ in Italia 🇮🇹  
+**🤝 Con la collaborazione di Massimiliano Cardinali** (Design & UX)
 
 ---
+**🏆 AUTENTICO v2.2** è un marchio di **Marco Buonopane**  
+**👥 Team**: Marco Buonopane (Owner/Developer) + Massimiliano Cardinali (Collaborator/Designer)  
 **🤖 Repository automatizzato e ottimizzato da AI Assistant**  
 **📅 Ultimo aggiornamento**: 23 Agosto 2024  
 **🎯 Status**: Produzione Ready ✅</p>
