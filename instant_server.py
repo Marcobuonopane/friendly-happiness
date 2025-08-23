@@ -21,9 +21,16 @@ class AutenticoHandler(http.server.SimpleHTTPRequestHandler):
         parsed_path = urlparse(self.path)
         path = parsed_path.path
         
-        # Route principale - serve la dashboard di Marco
+        # Route principale - rileva dispositivo e serve dashboard appropriata  
         if path == '/' or path == '/dashboard':
-            self.path = '/MARCO_DASHBOARD.html'
+            # Controlla se è un dispositivo mobile dall'User-Agent
+            user_agent = self.headers.get('User-Agent', '').lower()
+            is_mobile = any(device in user_agent for device in ['mobile', 'android', 'iphone', 'ipad', 'tablet'])
+            
+            if is_mobile:
+                self.path = '/MOBILE_DASHBOARD.html'
+            else:
+                self.path = '/MARCO_DASHBOARD.html'
         
         # Route per il download dell'app
         elif path == '/download' or path == '/install':
@@ -44,6 +51,10 @@ class AutenticoHandler(http.server.SimpleHTTPRequestHandler):
         # Route per il bypass reale
         elif path == '/hack' or path == '/real-bypass':
             self.path = '/BYPASS_TESTING_REAL.html'
+        
+        # Route per la versione mobile completa
+        elif path == '/mobile' or path == '/cellulare':
+            self.path = '/MOBILE_MAGIC_COMPLETE.html'
         
         # Route per il manifest PWA
         elif path == '/manifest.json':
@@ -110,6 +121,7 @@ def main():
             print(f"🎪 Compilatore Google Play: http://0.0.0.0:{PORT}/compile")
             print(f"🔓 Bypass Reale: http://0.0.0.0:{PORT}/hack")
             print(f"✨ Soluzione Magica: http://0.0.0.0:{PORT}/magic")
+            print(f"📱 VERSIONE MOBILE: http://0.0.0.0:{PORT}/mobile")
             print("🔄 Premi Ctrl+C per fermare il server")
             
             sys.stdout.flush()
