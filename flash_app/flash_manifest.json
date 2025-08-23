@@ -1,0 +1,37 @@
+{
+  "name": "FLASH - One-Click Play Store Publisher",
+  "short_name": "FLASH",
+  "description": "Sistema rivoluzionario per pubblicare app su Google Play Store con un solo click",
+  "version": "1.0",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ff6b6b",
+  "theme_color": "#ee5a24",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "flash_icon_192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "flash_icon_512.png", 
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["productivity", "developer tools"],
+  "lang": "it",
+  "scope": "/",
+  "developer": {
+    "name": "Marco Buonopane",
+    "url": "https://github.com/Marcobuonopane"
+  },
+  "screenshots": [
+    {
+      "src": "flash_screenshot_1.png",
+      "sizes": "1080x1920",
+      "type": "image/png"
+    }
+  ]
+}
