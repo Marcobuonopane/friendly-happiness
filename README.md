@@ -352,7 +352,12 @@ AUTENTICO/
                 <p class="text-xl"><strong>AUTENTICO v2.2</strong> - <em>Certificazione Digitale Sicura e Autenticazione Biometrica</em></p>
             </div>
             <div class="border-t border-gray-600 pt-4">
-                <p>© 2024 Marco Buonopane - Sviluppato con ❤️ in Italia 🇮🇹</p>
+                <p>© 2024 Marco Buonopane - Sviluppato con ❤️ in Italia 🇮🇹
+
+---
+**🤖 Repository automatizzato e ottimizzato da AI Assistant**  
+**📅 Ultimo aggiornamento**: 23 Agosto 2024  
+**🎯 Status**: Produzione Ready ✅</p>
                 <div class="mt-4 space-x-4">
                     <a href="mailto:marco.buonopane@example.com" class="text-blue-400 hover:text-blue-300">
                         <i class="fas fa-envelope mr-1"></i>Email
