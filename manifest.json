@@ -1,0 +1,125 @@
+{
+  "name": "AUTENTICO v2.2 - Sistema Certificazione Digitale",
+  "short_name": "AUTENTICO v2.2",
+  "description": "Sistema di certificazione digitale con crittografia AES-256 e autenticazione biometrica",
+  "version": "2.2.0",
+  "manifest_version": 2,
+  "start_url": "/src/index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#667eea",
+  "background_color": "#ffffff",
+  "scope": "/",
+  "lang": "it",
+  "dir": "ltr",
+  "categories": ["productivity", "security", "business"],
+  "screenshots": [
+    {
+      "src": "/assets/screenshot1.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Schermata principale AUTENTICO v2.2"
+    },
+    {
+      "src": "/assets/screenshot2.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Certificazione documento"
+    }
+  ],
+  "icons": [
+    {
+      "src": "/assets/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Nuova Certificazione",
+      "short_name": "Certifica",
+      "description": "Crea una nuova certificazione digitale",
+      "url": "/src/index.html#certify",
+      "icons": [
+        {
+          "src": "/assets/shortcut-certify.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Verifica Documento",
+      "short_name": "Verifica",
+      "description": "Verifica l'autenticità di un documento",
+      "url": "/src/index.html#verify",
+      "icons": [
+        {
+          "src": "/assets/shortcut-verify.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.marcobuonopane.autentico",
+      "id": "com.marcobuonopane.autentico"
+    }
+  ],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "protocol_handlers": [
+    {
+      "protocol": "mailto",
+      "url": "/src/index.html#share?to=%s"
+    }
+  ]
+}

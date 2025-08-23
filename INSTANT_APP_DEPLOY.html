@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📱 AUTENTICO v2.2 - Download Istantaneo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .download-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            animation: slideIn 1s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .app-icon {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 25px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .app-title {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .app-subtitle {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .download-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.3em;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        
+        .install-btn {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+        
+        .share-btn {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            color: #333;
+        }
+        
+        .features {
+            text-align: left;
+            margin: 30px 0;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+        
+        .feature-icon {
+            font-size: 1.5em;
+            margin-right: 15px;
+            width: 30px;
+        }
+        
+        .qr-code {
+            background: #f0f0f0;
+            border: 2px dashed #ccc;
+            width: 150px;
+            height: 150px;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            border-radius: 10px;
+        }
+        
+        .success-message {
+            display: none;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="download-container">
+        <div class="app-icon">🔐</div>
+        <h1 class="app-title">AUTENTICO v2.2</h1>
+        <p class="app-subtitle">Sistema di Certificazione Digitale<br>by Marco Buonopane</p>
+        
+        <div class="features">
+            <h3 style="text-align: center; margin-bottom: 15px;">🌟 Caratteristiche Premium</h3>
+            <div class="feature-item">
+                <span class="feature-icon">🔒</span>
+                <span>Crittografia AES-256</span>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">👆</span>
+                <span>Autenticazione Biometrica</span>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">📍</span>
+                <span>Geolocalizzazione GPS</span>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">🔐</span>
+                <span>Firma Digitale SHA-256</span>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">🛡️</span>
+                <span>Privacy by Design</span>
+            </div>
+        </div>
+        
+        <a href="#" class="download-btn install-btn" onclick="installApp()">
+            📱 INSTALLA APP
+        </a>
+        
+        <a href="#" class="download-btn" onclick="openApp()">
+            🚀 APRI WEB APP
+        </a>
+        
+        <a href="#" class="download-btn share-btn" onclick="shareApp()">
+            📤 CONDIVIDI
+        </a>
+        
+        <div class="qr-code" onclick="showQRCode()">
+            📱 QR CODE
+        </div>
+        
+        <div id="successMessage" class="success-message">
+            🎉 AUTENTICO v2.2 installato con successo!<br>
+            Puoi ora certificare documenti digitalmente!
+        </div>
+        
+        <p style="margin-top: 30px; color: #666; font-size: 0.9em;">
+            ⚡ Installazione istantanea • ✅ Funziona offline • 🌍 Disponibile ovunque
+        </p>
+    </div>
+
+    <script>
+        // Dati dell'app AUTENTICO v2.2
+        const appData = {
+            name: 'AUTENTICO v2.2',
+            url: window.location.origin + '/src/index.html',
+            description: 'Sistema di Certificazione Digitale con AES-256',
+            icon: '/assets/icon-192x192.png',
+            developer: 'Marco Buonopane'
+        };
+
+        function installApp() {
+            // PWA Installation
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/sw.js').then(() => {
+                    showSuccess();
+                    setTimeout(() => {
+                        window.location.href = appData.url;
+                    }, 2000);
+                });
+            } else {
+                // Fallback per browser non supportati
+                openApp();
+            }
+        }
+
+        function openApp() {
+            window.open(appData.url, '_blank');
+            showSuccess();
+        }
+
+        function shareApp() {
+            if (navigator.share) {
+                navigator.share({
+                    title: appData.name,
+                    text: appData.description,
+                    url: window.location.href
+                });
+            } else {
+                // Fallback per browser non supportati
+                const shareUrl = window.location.href;
+                navigator.clipboard.writeText(shareUrl).then(() => {
+                    alert('🔗 Link copiato negli appunti!\nCondividilo con chi vuoi!');
+                });
+            }
+        }
+
+        function showQRCode() {
+            alert('📱 Scansiona questo QR Code con il telefono per installare AUTENTICO v2.2!\n\n' + window.location.href);
+        }
+
+        function showSuccess() {
+            document.getElementById('successMessage').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('successMessage').style.display = 'none';
+            }, 5000);
+        }
+
+        // Registrazione automatica PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js');
+            });
+        }
+
+        // Messaggio di benvenuto
+        setTimeout(() => {
+            alert('🎯 Benvenuto nella pagina di download di AUTENTICO v2.2!\n\n📱 Clicca "INSTALLA APP" per installare sul dispositivo\n🚀 Clicca "APRI WEB APP" per usarla subito\n📤 Clicca "CONDIVIDI" per mandare il link agli amici!');
+        }, 1000);
+    </script>
+</body>
+</html>
