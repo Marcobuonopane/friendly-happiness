@@ -1,0 +1,25 @@
+[
+  {
+    "product_id": "premium_monthly",
+    "type": "subscription",
+    "price_tier": "tier_4",
+    "billing_period": "P1M",
+    "title": "AUTENTICO Premium Monthly",
+    "description": "Unlimited certificates, advanced features, priority support"
+  },
+  {
+    "product_id": "premium_yearly",
+    "type": "subscription",
+    "price_tier": "tier_8",
+    "billing_period": "P1Y",
+    "title": "AUTENTICO Premium Yearly",
+    "description": "Save 17%! Full premium access for one year"
+  },
+  {
+    "product_id": "enterprise_license",
+    "type": "managed_product",
+    "price_tier": "tier_12",
+    "title": "Enterprise License",
+    "description": "White-label license for business deployment"
+  }
+]

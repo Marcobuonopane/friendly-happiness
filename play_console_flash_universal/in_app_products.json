@@ -1,0 +1,25 @@
+[
+  {
+    "product_id": "publisher_pro",
+    "type": "subscription",
+    "price_tier": "tier_5",
+    "billing_period": "P1M",
+    "title": "Publisher Pro Monthly",
+    "description": "Unlimited app publishing, premium stores, analytics"
+  },
+  {
+    "product_id": "publisher_enterprise",
+    "type": "subscription",
+    "price_tier": "tier_9",
+    "billing_period": "P1Y",
+    "title": "Publisher Enterprise Yearly",
+    "description": "Complete publishing suite with white-label options"
+  },
+  {
+    "product_id": "lifetime_license",
+    "type": "managed_product",
+    "price_tier": "tier_15",
+    "title": "Lifetime Publisher License",
+    "description": "One-time payment for unlimited lifetime access"
+  }
+]

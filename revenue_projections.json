@@ -1,0 +1,82 @@
+{
+  "tracking_id": "PLAY-CONSOLE-20250830-112546",
+  "apps": {
+    "autentico": {
+      "package": "com.marcobuonopane.autentico",
+      "version": "2.2.0",
+      "products": [
+        {
+          "id": "premium_monthly",
+          "type": "subscription",
+          "price": 9.99,
+          "currency": "EUR",
+          "projected_monthly": 500,
+          "projected_revenue": 4995.0
+        },
+        {
+          "id": "premium_yearly",
+          "type": "subscription",
+          "price": 99.99,
+          "currency": "EUR",
+          "projected_monthly": 200,
+          "projected_revenue": 19998.0
+        },
+        {
+          "id": "enterprise_license",
+          "type": "managed_product",
+          "price": 299.99,
+          "currency": "EUR",
+          "projected_monthly": 50,
+          "projected_revenue": 14999.5
+        }
+      ],
+      "projected_monthly_total": 39992.5,
+      "projected_yearly_total": 479910.0
+    },
+    "flash_universal": {
+      "package": "com.marcobuonopane.flashuniversal",
+      "version": "3.0.0",
+      "products": [
+        {
+          "id": "publisher_pro",
+          "type": "subscription",
+          "price": 14.99,
+          "currency": "EUR",
+          "projected_monthly": 400,
+          "projected_revenue": 5996.0
+        },
+        {
+          "id": "publisher_enterprise",
+          "type": "subscription",
+          "price": 149.99,
+          "currency": "EUR",
+          "projected_monthly": 100,
+          "projected_revenue": 14999.0
+        },
+        {
+          "id": "lifetime_license",
+          "type": "managed_product",
+          "price": 499.99,
+          "currency": "EUR",
+          "projected_monthly": 30,
+          "projected_revenue": 14999.7
+        }
+      ],
+      "projected_monthly_total": 35994.7,
+      "projected_yearly_total": 431936.4
+    }
+  },
+  "combined_projections": {
+    "monthly_revenue": 75987.2,
+    "yearly_revenue": 911846.4,
+    "conservative_estimate": 683884.8,
+    "optimistic_estimate": 1367769.6
+  },
+  "market_analysis": {
+    "target_users": "4.5B+",
+    "languages": 22,
+    "conversion_rate": "2.5%",
+    "retention_rate": "85%",
+    "growth_rate": "15% monthly"
+  }
+}

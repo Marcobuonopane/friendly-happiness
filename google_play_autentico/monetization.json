@@ -1,0 +1,23 @@
+[
+  {
+    "product_id": "premium_monthly",
+    "type": "subs",
+    "price": "\u20ac9.99",
+    "title": "AUTENTICO Premium (Monthly)",
+    "description": "Unlimited certificates, advanced encryption, priority support"
+  },
+  {
+    "product_id": "premium_yearly",
+    "type": "subs",
+    "price": "\u20ac99.99",
+    "title": "AUTENTICO Premium (Yearly)",
+    "description": "Save 17% - Unlimited certificates, enterprise features"
+  },
+  {
+    "product_id": "enterprise_license",
+    "type": "inapp",
+    "price": "\u20ac299.99",
+    "title": "Enterprise License",
+    "description": "White-label license for business use"
+  }
+]

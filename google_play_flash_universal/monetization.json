@@ -1,0 +1,23 @@
+[
+  {
+    "product_id": "pro_monthly",
+    "type": "subs",
+    "price": "\u20ac19.99",
+    "title": "FLASH UNIVERSAL Pro (Monthly)",
+    "description": "Unlimited store publishing, priority queues, analytics"
+  },
+  {
+    "product_id": "pro_yearly",
+    "type": "subs",
+    "price": "\u20ac199.99",
+    "title": "FLASH UNIVERSAL Pro (Yearly)",
+    "description": "Save 17% - Full automation, enterprise features"
+  },
+  {
+    "product_id": "developer_license",
+    "type": "inapp",
+    "price": "\u20ac499.99",
+    "title": "Developer License",
+    "description": "Reseller rights and white-label distribution"
+  }
+]

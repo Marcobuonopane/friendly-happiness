@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AUTENTICO - Informazioni App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #f5f1e8 0%, #e8dcc0 100%);
+            min-height: 100vh;
+            color: #2c1810;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: rgba(255,255,255,0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .logo {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+
+        .app-title {
+            font-size: 3em;
+            color: #2c1810;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+
+        .version {
+            font-size: 1.5em;
+            color: #8b4513;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .description {
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .section {
+            background: rgba(255,255,255,0.9);
+            margin: 20px 0;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 2px solid #d4b895;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #2c1810;
+            border-bottom: 3px solid #8b4513;
+            padding-bottom: 10px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .feature-card {
+            background: #f8f5f0;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #8b4513;
+        }
+
+        .feature-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .languages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .language-item {
+            background: #f0ead6;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .credits-section {
+            background: linear-gradient(135deg, #8b4513 0%, #a0522d 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .credit-person {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+        }
+
+        .person-name {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .person-role {
+            font-size: 1.1em;
+            color: #f0e68c;
+            margin-bottom: 10px;
+        }
+
+        .person-details {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .download-section {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #228b22 0%, #32cd32 100%);
+            color: white;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background: white;
+            color: #228b22;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin: 10px;
+            transition: transform 0.3s;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .stores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .store-category {
+            background: rgba(255,255,255,0.9);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .store-category h4 {
+            color: #2c1810;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .store-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .store-list li {
+            padding: 5px 0;
+            color: #555;
+        }
+
+        @media (max-width: 768px) {
+            .app-title {
+                font-size: 2em;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .languages-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://page.gensparksite.com/v1/base64_upload/18914ed922aa3ac98fd1e3cc46b9055c" alt="AUTENTICO Logo" class="logo">
+            <h1 class="app-title">AUTENTICO</h1>
+            <div class="version">v2.2 FINALE</div>
+            <p class="description">
+                Sistema rivoluzionario di certificazione digitale con autenticazione biometrica, 
+                tracciamento GPS e crittografia AES-256 per garantire l'autenticità dei tuoi documenti.
+            </p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">🚀 Caratteristiche Principali</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h4>Crittografia AES-256</h4>
+                    <p>Massima sicurezza per i tuoi documenti con crittografia militare</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👆</div>
+                    <h4>Autenticazione Biometrica</h4>
+                    <p>Impronte digitali e riconoscimento facciale per accesso sicuro</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📍</div>
+                    <h4>Tracciamento GPS</h4>
+                    <p>Verifica della posizione per certificazioni geografiche</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📜</div>
+                    <h4>Certificati Digitali</h4>
+                    <p>Sistema completo di validazione con firme crittografiche</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h4>Cassaforte Digitale</h4>
+                    <p>Archiviazione sicura per tutti i tuoi file importanti</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h4>13 Lingue</h4>
+                    <p>Supporto multilingue per accessibilità globale</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">🌍 Lingue Supportate</h2>
+            <div class="languages-grid">
+                <div class="language-item">🇮🇹 Italiano</div>
+                <div class="language-item">🇬🇧 English</div>
+                <div class="language-item">🇪🇸 Español</div>
+                <div class="language-item">🇫🇷 Français</div>
+                <div class="language-item">🇩🇪 Deutsch</div>
+                <div class="language-item">🇵🇹 Português</div>
+                <div class="language-item">🇷🇺 Русский</div>
+                <div class="language-item">🇨🇳 中文</div>
+                <div class="language-item">🇯🇵 日本語</div>
+                <div class="language-item">🇸🇦 العربية</div>
+                <div class="language-item">🇰🇷 한국어</div>
+                <div class="language-item">🇮🇳 हिन्दी</div>
+                <div class="language-item">🇹🇷 Türkçe</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">🏪 Disponibile Su Tutti Gli Store</h2>
+            <div class="stores-grid">
+                <div class="store-category">
+                    <h4>📱 Mobile</h4>
+                    <ul class="store-list">
+                        <li>Google Play Store</li>
+                        <li>Apple App Store</li>
+                        <li>Samsung Galaxy Store</li>
+                        <li>Amazon Appstore</li>
+                        <li>Huawei AppGallery</li>
+                        <li>Xiaomi GetApps</li>
+                    </ul>
+                </div>
+                <div class="store-category">
+                    <h4>💻 Desktop</h4>
+                    <ul class="store-list">
+                        <li>Microsoft Store</li>
+                        <li>Mac App Store</li>
+                        <li>Snap Store</li>
+                        <li>Chrome Web Store</li>
+                    </ul>
+                </div>
+                <div class="store-category">
+                    <h4>🎮 Gaming</h4>
+                    <ul class="store-list">
+                        <li>Steam</li>
+                        <li>Epic Games Store</li>
+                        <li>PlayStation Store</li>
+                        <li>Xbox Store</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section credits-section">
+            <h2 class="section-title">🏆 Credits & Sviluppo</h2>
+            <div class="credit-person">
+                <div class="person-name">Marco Buonopane</div>
+                <div class="person-role">Creatore & Proprietario</div>
+                <div class="person-details">
+                    Roma, 10 Maggio 1976<br>
+                    Visionario e architetto del sistema AUTENTICO<br>
+                    Lead developer e product owner
+                </div>
+            </div>
+            <div class="credit-person">
+                <div class="person-name">Massimiliano Cardinali</div>
+                <div class="person-role">Collaboratore Design</div>
+                <div class="person-details">
+                    Design visuale e user experience<br>
+                    Brand identity e design dell'interfaccia<br>
+                    Collaboratore per l'elegante tema pergamena
+                </div>
+            </div>
+        </div>
+
+        <div class="download-section">
+            <h2>🚀 Inizia Subito!</h2>
+            <p style="font-size: 1.2em; margin-bottom: 20px;">
+                Scarica AUTENTICO oggi e proteggi il tuo futuro digitale
+            </p>
+            <a href="../src/index.html" class="download-btn">
+                🔐 Apri AUTENTICO
+            </a>
+            <p style="margin-top: 20px; opacity: 0.9;">
+                Disponibile su tutte le piattaforme • 4+ miliardi di utenti raggiungibili • 13 lingue supportate
+            </p>
+        </div>
+    </div>
+</body>
+</html>
