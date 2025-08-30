@@ -1,0 +1,16 @@
+{
+  "name": "AUTENTICO - Digital Certification",
+  "short_name": "AUTENTICO",
+  "description": "Revolutionary digital certification system with biometric authentication and AES-256 encryption",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f1e8",
+  "theme_color": "#8b4513",
+  "icons": [
+    {
+      "src": "https://page.gensparksite.com/v1/base64_upload/18914ed922aa3ac98fd1e3cc46b9055c",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

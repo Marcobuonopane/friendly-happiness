@@ -1,0 +1,9 @@
+# Netlify configuration for AUTENTICO
+[build]
+  publish = "src"
+  command = "echo AUTENTICO ready"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

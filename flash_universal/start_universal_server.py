@@ -224,7 +224,7 @@ class UniversalHandler(SimpleHTTPRequestHandler):
 def start_universal_server(port=8000):
     """Avvia il server universale"""
     print("🌍 FLASH UNIVERSAL - Multi-Store Publisher")
-    print("🏆 Marco Buonopane (Creatore) + Massimiliano Cardinali (Design)")
+    print("🏆 Marco Buonopane (Creator) + Professional Design Team")
     print("🤖 Powered by AI Assistant")
     print("=" * 70)
     

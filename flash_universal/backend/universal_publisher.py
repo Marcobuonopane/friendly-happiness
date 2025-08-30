@@ -2,7 +2,7 @@
 """
 🌍 FLASH UNIVERSAL - Multi-Store Publisher
 Sistema rivoluzionario per pubblicare su TUTTI gli store del mondo
-Marco Buonopane (Creatore) + Massimiliano Cardinali (Design)
+Marco Buonopane (Creator) + Professional Design Team
 """
 
 import json
@@ -361,7 +361,7 @@ async def main():
     
     # Test pubblicazione universale
     print("🌍 TEST PUBBLICAZIONE UNIVERSALE FLASH")
-    print("👥 Team: Marco Buonopane + Massimiliano Cardinali")
+    print("👥 Team: Marco Buonopane + Professional Design Team")
     print()
     
     # Pubblica su alcuni store per demo
