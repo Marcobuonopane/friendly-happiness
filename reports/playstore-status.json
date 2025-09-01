@@ -1,0 +1,26 @@
+{
+  "timestamp": "2025-09-01T14:30:10.001Z",
+  "app": {
+    "name": "AUTENTICO v2.2",
+    "packageName": "com.marcobuonopane.autentico"
+  },
+  "status": {
+    "status": "error",
+    "installable": false,
+    "error": "HTTP 404: Not Found"
+  },
+  "metadata": {
+    "error": "HTTP 404: Not Found"
+  },
+  "links": {
+    "public": "https://play.google.com/store/apps/details?id=com.marcobuonopane.autentico",
+    "directInstall": "https://play.app.goo.gl/?link=https://play.google.com/store/apps/details?id=com.marcobuonopane.autentico",
+    "marketUrl": "market://details?id=com.marcobuonopane.autentico",
+    "webInstall": "https://play.google.com/store/apps/details?id=com.marcobuonopane.autentico&launch=true"
+  },
+  "checks": {
+    "publicStore": false,
+    "installable": false,
+    "hasMetadata": false
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "timestamp": "2025-09-01T14:30:15.583Z",
+  "app": {
+    "name": "AUTENTICO v2.2",
+    "packageName": "com.marcobuonopane.autentico",
+    "developer": "Marco Buonopane"
+  },
+  "links": {
+    "playStore": "https://play.google.com/store/apps/details?id=com.marcobuonopane.autentico",
+    "playStoreShort": "https://play.app.goo.gl/?link=https://play.google.com/store/apps/details?id=com.marcobuonopane.autentico",
+    "marketDetails": "market://details?id=com.marcobuonopane.autentico",
+    "marketSearch": "market://search?q=com.marcobuonopane.autentico",
+    "webInstall": "https://play.google.com/store/apps/details?id=com.marcobuonopane.autentico&launch=true",
+    "developerPage": "https://play.google.com/store/apps/developer?id=Marco%20Buonopane",
+    "internalTesting": "https://play.google.com/apps/internaltest/com.marcobuonopane.autentico",
+    "betaTesting": "https://play.google.com/apps/test/com.marcobuonopane.autentico",
+    "amazonAppstore": "https://www.amazon.com/gp/mas/dl/android?p=com.marcobuonopane.autentico",
+    "samsungGalaxyStore": "https://galaxystore.samsung.com/detail/com.marcobuonopane.autentico",
+    "apkDirect": "https://github.com/Marcobuonopane/friendly-happiness/releases/latest/download/autentico-v2.2.0.apk",
+    "githubRepo": "https://github.com/Marcobuonopane/friendly-happiness",
+    "support": "mailto:marco.buonopane@example.com",
+    "website": "https://marcobuonopane.github.io/autentico"
+  },
+  "qrCodes": {
+    "playStore": "https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.marcobuonopane.autentico",
+    "playStoreShort": "https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=https%3A%2F%2Fplay.app.goo.gl%2F%3Flink%3Dhttps%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.marcobuonopane.autentico",
+    "webInstall": "https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.marcobuonopane.autentico%26launch%3Dtrue",
+    "githubRepo": "https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=https%3A%2F%2Fgithub.com%2FMarcobuonopane%2Ffriendly-happiness",
+    "website": "https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=https%3A%2F%2Fmarcobuonopane.github.io%2Fautentico"
+  },
+  "socialShareLinks": {
+    "twitter": "https://twitter.com/intent/tweet?text=Scopri%20AUTENTICO%20v2.2%20-%20Sistema%20di%20Certificazione%20Digitale%20Sicura!&url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.marcobuonopane.autentico",
+    "facebook": "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.marcobuonopane.autentico",
+    "linkedin": "https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.marcobuonopane.autentico",
+    "whatsapp": "https://wa.me/?text=Scopri%20AUTENTICO%20v2.2%20-%20Sistema%20di%20Certificazione%20Digitale%20Sicura!%20https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.marcobuonopane.autentico",
+    "telegram": "https://t.me/share/url?url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.marcobuonopane.autentico&text=Scopri%20AUTENTICO%20v2.2%20-%20Sistema%20di%20Certificazione%20Digitale%20Sicura!",
+    "email": "mailto:?subject=AUTENTICO%20v2.2&body=Scopri%20AUTENTICO%20v2.2%20-%20Sistema%20di%20Certificazione%20Digitale%20Sicura!%20https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.marcobuonopane.autentico",
+    "reddit": "https://reddit.com/submit?url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.marcobuonopane.autentico&title=Scopri%20AUTENTICO%20v2.2%20-%20Sistema%20di%20Certificazione%20Digitale%20Sicura!",
+    "pinterest": "https://pinterest.com/pin/create/button/?url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.marcobuonopane.autentico&description=Scopri%20AUTENTICO%20v2.2%20-%20Sistema%20di%20Certificazione%20Digitale%20Sicura!",
+    "tumblr": "https://www.tumblr.com/share/link?url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.marcobuonopane.autentico&name=AUTENTICO%20v2.2&description=Scopri%20AUTENTICO%20v2.2%20-%20Sistema%20di%20Certificazione%20Digitale%20Sicura!"
+  }
+}

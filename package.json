@@ -16,6 +16,11 @@
     "setup:secrets": "./scripts/setup-playstore-api.sh secrets",
     "validate:aab": "fastlane android build_and_validate",
     "update:metadata": "fastlane android update_metadata",
+    "check:playstore": "node scripts/check-playstore-status.js",
+    "monitor:playstore": "./scripts/monitor-playstore.sh monitor",
+    "status:playstore": "./scripts/monitor-playstore.sh status",
+    "generate:links": "node scripts/generate-store-links.js",
+    "dashboard:playstore": "python3 -m http.server 8080 --directory scripts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
