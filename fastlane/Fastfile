@@ -1,0 +1,164 @@
+# AUTENTICO v2.2 - Fastlane Configuration
+# Automated Google Play Store Deployment
+# © 2024 Marco Buonopane
+
+default_platform(:android)
+
+platform :android do
+  desc "Deploy AUTENTICO to Google Play Store"
+  lane :deploy_playstore do
+    # Increment version code automatically
+    increment_version_code_in_project_file(
+      gradle_file_path: "./android/app/build.gradle"
+    )
+    
+    # Build AAB
+    gradle(
+      task: "bundle",
+      build_type: "Release",
+      project_dir: "./android/"
+    )
+    
+    # Upload to Google Play Store
+    upload_to_play_store(
+      track: 'production',
+      aab: './android/app/build/outputs/bundle/release/app-release.aab',
+      skip_upload_apk: true,
+      skip_upload_metadata: false,
+      skip_upload_images: false,
+      skip_upload_screenshots: false
+    )
+    
+    # Send notification
+    slack(
+      message: "🎉 AUTENTICO v2.2 successfully deployed to Google Play Store!",
+      channel: "#releases",
+      success: true
+    ) if ENV["SLACK_WEBHOOK_URL"]
+  end
+
+  desc "Deploy to Internal Testing"
+  lane :deploy_internal do
+    gradle(
+      task: "bundle",
+      build_type: "Release", 
+      project_dir: "./android/"
+    )
+    
+    upload_to_play_store(
+      track: 'internal',
+      aab: './android/app/build/outputs/bundle/release/app-release.aab',
+      skip_upload_apk: true,
+      skip_upload_metadata: true,
+      skip_upload_images: true, 
+      skip_upload_screenshots: true
+    )
+    
+    puts "✅ Deployed to Internal Testing track"
+  end
+
+  desc "Deploy to Beta Testing"
+  lane :deploy_beta do
+    gradle(
+      task: "bundle",
+      build_type: "Release",
+      project_dir: "./android/"
+    )
+    
+    upload_to_play_store(
+      track: 'beta',
+      aab: './android/app/build/outputs/bundle/release/app-release.aab',
+      skip_upload_apk: true,
+      skip_upload_metadata: false,
+      skip_upload_images: false,
+      skip_upload_screenshots: false
+    )
+    
+    puts "✅ Deployed to Beta Testing track"
+  end
+
+  desc "Build and validate AAB"
+  lane :build_and_validate do
+    # Clean build
+    gradle(
+      task: "clean",
+      project_dir: "./android/"
+    )
+    
+    # Build AAB
+    gradle(
+      task: "bundle",
+      build_type: "Release", 
+      project_dir: "./android/"
+    )
+    
+    # Validate AAB
+    aab_path = "./android/app/build/outputs/bundle/release/app-release.aab"
+    
+    if File.exist?(aab_path)
+      file_size = File.size(aab_path) / 1024.0 / 1024.0
+      puts "✅ AAB generated successfully"
+      puts "📦 File size: #{file_size.round(2)} MB"
+      
+      if file_size > 150
+        puts "⚠️  Warning: AAB size exceeds 150MB"
+      end
+    else
+      UI.user_error!("❌ AAB file not generated")
+    end
+  end
+
+  desc "Update store metadata only"
+  lane :update_metadata do
+    upload_to_play_store(
+      skip_upload_aab: true,
+      skip_upload_apk: true,
+      skip_upload_metadata: false,
+      skip_upload_images: false,
+      skip_upload_screenshots: false
+    )
+    
+    puts "✅ Store metadata updated"
+  end
+
+  desc "Generate and upload screenshots" 
+  lane :update_screenshots do
+    # This would typically use screengrab or similar
+    # For now, manual screenshots should be placed in fastlane/metadata/android
+    
+    upload_to_play_store(
+      skip_upload_aab: true,
+      skip_upload_apk: true, 
+      skip_upload_metadata: true,
+      skip_upload_images: false,
+      skip_upload_screenshots: false
+    )
+    
+    puts "✅ Screenshots updated"
+  end
+
+  # Error handling
+  error do |lane, exception|
+    puts "❌ Error in lane #{lane}: #{exception.message}"
+    
+    # Send error notification
+    slack(
+      message: "❌ AUTENTICO deployment failed in #{lane}: #{exception.message}",
+      channel: "#releases", 
+      success: false
+    ) if ENV["SLACK_WEBHOOK_URL"]
+  end
+
+  # Before all lanes
+  before_all do
+    puts "🚀 Starting AUTENTICO v2.2 deployment process..."
+    puts "📱 Package: com.marcobuonopane.autentico"
+    puts "⏰ Time: #{Time.now}"
+  end
+
+  # After all lanes  
+  after_all do |lane|
+    puts "✅ Lane #{lane} completed successfully!"
+    puts "🎉 AUTENTICO v2.2 deployment finished"
+  end
+end

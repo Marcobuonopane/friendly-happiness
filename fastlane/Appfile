@@ -1,0 +1,4 @@
+# AUTENTICO v2.2 - Fastlane App Configuration
+
+json_key_file("./fastlane/google-play-api-key.json") # Path to the json secret file
+package_name("com.marcobuonopane.autentico") # e.g. com.krausefx.app

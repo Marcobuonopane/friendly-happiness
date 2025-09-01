@@ -7,6 +7,15 @@
     "start": "python3 -m http.server 8000",
     "dev": "python3 -m http.server 8080",
     "build": "node build/build.js",
+    "build:android": "node scripts/auto-build-playstore.js",
+    "deploy:internal": "./scripts/deploy-playstore.sh internal",
+    "deploy:beta": "./scripts/deploy-playstore.sh beta", 
+    "deploy:production": "./scripts/deploy-playstore.sh production",
+    "deploy:quick": "./scripts/deploy-playstore.sh internal true",
+    "setup:playstore": "./scripts/setup-playstore-api.sh",
+    "setup:secrets": "./scripts/setup-playstore-api.sh secrets",
+    "validate:aab": "fastlane android build_and_validate",
+    "update:metadata": "fastlane android update_metadata",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
