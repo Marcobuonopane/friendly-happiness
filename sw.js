@@ -1,34 +1,43 @@
-// Service Worker per AUTENTICO v2.2 PWA
-const CACHE_NAME = 'autentico-v2.2-cache';
+/**
+ * AUTENTICO v2.2 - Service Worker
+ * Sistema di Certificazione Digitale
+ * © 2024 Marco Buonopane
+ */
+
+const CACHE_NAME = 'autentico-v2.2';
 const urlsToCache = [
   '/',
+  '/index.html',
   '/src/index.html',
-  '/INSTANT_APP_DEPLOY.html',
-  '/assets/icon-192x192.png',
-  '/assets/icon-512x512.png'
+  '/manifest.json',
+  '/assets/autentico_logo_official.png',
+  '/assets/app_icon.png'
 ];
 
 // Installazione Service Worker
-self.addEventListener('install', (event) => {
-  console.log('🔧 Service Worker: Installazione in corso...');
+self.addEventListener('install', function(event) {
+  console.log('[Service Worker] Installing...');
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then((cache) => {
-        console.log('📦 Cache aperta');
+      .then(function(cache) {
+        console.log('[Service Worker] Caching app shell');
         return cache.addAll(urlsToCache);
+      })
+      .catch(function(error) {
+        console.log('[Service Worker] Cache failed:', error);
       })
   );
 });
 
 // Attivazione Service Worker
-self.addEventListener('activate', (event) => {
-  console.log('✅ Service Worker: Attivato');
+self.addEventListener('activate', function(event) {
+  console.log('[Service Worker] Activating...');
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
+    caches.keys().then(function(cacheNames) {
       return Promise.all(
-        cacheNames.map((cacheName) => {
+        cacheNames.map(function(cacheName) {
           if (cacheName !== CACHE_NAME) {
-            console.log('🗑️ Cache vecchia rimossa:', cacheName);
+            console.log('[Service Worker] Deleting old cache:', cacheName);
             return caches.delete(cacheName);
           }
         })
@@ -38,32 +47,75 @@ self.addEventListener('activate', (event) => {
 });
 
 // Intercettazione richieste
-self.addEventListener('fetch', (event) => {
+self.addEventListener('fetch', function(event) {
   event.respondWith(
     caches.match(event.request)
-      .then((response) => {
-        // Restituisce la versione cached se disponibile
+      .then(function(response) {
+        // Restituisci la risorsa dalla cache se disponibile
         if (response) {
-          console.log('📁 Servito dalla cache:', event.request.url);
           return response;
         }
         
-        // Altrimenti scarica dalla rete
-        console.log('🌐 Scaricato dalla rete:', event.request.url);
-        return fetch(event.request);
+        // Altrimenti, prova a recuperarla dalla rete
+        return fetch(event.request).then(function(response) {
+          // Controlla se la risposta è valida
+          if (!response || response.status !== 200 || response.type !== 'basic') {
+            return response;
+          }
+
+          // Clona la risposta per salvarla nella cache
+          const responseToCache = response.clone();
+
+          caches.open(CACHE_NAME)
+            .then(function(cache) {
+              cache.put(event.request, responseToCache);
+            });
+
+          return response;
+        });
+      })
+      .catch(function() {
+        // Se sia cache che rete falliscono, mostra pagina offline
+        if (event.request.destination === 'document') {
+          return caches.match('/index.html');
+        }
       })
   );
 });
 
-// Notifiche push (opzionale)
-self.addEventListener('push', (event) => {
+// Gestione messaggi dal client
+self.addEventListener('message', function(event) {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
+});
+
+// Gestione notifiche push (per future implementazioni)
+self.addEventListener('push', function(event) {
+  console.log('[Service Worker] Push received');
+  
   const options = {
-    body: 'AUTENTICO v2.2 ha una nuova funzionalità!',
-    icon: '/assets/icon-192x192.png',
-    badge: '/assets/icon-192x192.png'
+    body: event.data ? event.data.text() : 'Nuova notifica da AUTENTICO',
+    icon: '/assets/app_icon.png',
+    badge: '/assets/app_icon.png',
+    vibrate: [100, 50, 100],
+    data: {
+      dateOfArrival: Date.now(),
+      primaryKey: 1
+    }
   };
 
   event.waitUntil(
-    self.registration.showNotification('AUTENTICO v2.2', options)
+    self.registration.showNotification('AUTENTICO', options)
+  );
+});
+
+// Gestione click sulle notifiche
+self.addEventListener('notificationclick', function(event) {
+  console.log('[Service Worker] Notification clicked');
+  event.notification.close();
+
+  event.waitUntil(
+    clients.openWindow('/')
   );
 });

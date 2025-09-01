@@ -1,0 +1,57 @@
+{
+  "name": "autentico",
+  "version": "2.2.0",
+  "description": "Sistema di Certificazione Digitale con crittografia AES-256 e autenticazione biometrica",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "dev": "python3 -m http.server 8080",
+    "build": "node build/build.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "digital-certification",
+    "biometric-authentication", 
+    "aes-256-encryption",
+    "pwa",
+    "security",
+    "document-protection",
+    "blockchain"
+  ],
+  "author": {
+    "name": "Marco Buonopane",
+    "email": "marco.buonopane@example.com",
+    "url": "https://github.com/Marcobuonopane"
+  },
+  "contributors": [
+    {
+      "name": "Massimiliano Cardinali",
+      "role": "Design & UX Specialist"
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/Marcobuonopane/friendly-happiness",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Marcobuonopane/friendly-happiness.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Marcobuonopane/friendly-happiness/issues"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ],
+  "pwa": {
+    "name": "AUTENTICO v2.2",
+    "short_name": "AUTENTICO",
+    "theme_color": "#8b4513",
+    "background_color": "#f5f1e8",
+    "display": "standalone",
+    "start_url": "/"
+  }
+}
