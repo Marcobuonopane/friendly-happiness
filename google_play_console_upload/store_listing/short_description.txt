@@ -1,0 +1,1 @@
+Sistema di certificazione digitale con crittografia AES-256 e autenticazione biometrica per documenti sicuri e verificabili.

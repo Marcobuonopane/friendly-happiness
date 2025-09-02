@@ -1,0 +1,30 @@
+🚀 AUTENTICO v2.2 - Final Release
+
+✨ NEW FEATURES:
+• 🔐 Military-grade AES-256-GCM encryption
+• 🔍 WebAuthn biometric authentication (fingerprint + Face ID)
+• 📋 Digital certificates with SHA-256 signature and GPS timestamp
+• 🔒 Digital vault with end-to-end encryption
+• 🌍 Support for 13 international languages
+• 📱 Complete PWA with native installation
+
+🔧 IMPROVEMENTS:
+• Redesigned responsive user interface
+• Performance optimized for all devices
+• Advanced error handling and user feedback
+• Precise geolocation for certificates
+• Professional PDF export of certificates
+
+🛡️ SECURITY:
+• No data sent to external servers
+• Local encryption on device
+• GDPR compliance and privacy by design
+• Protection against tampering
+
+🎯 COMPATIBILITY:
+• Android 7.0+ (API level 24+)
+• All modern browsers
+• Complete offline support
+• Installation as native app
+
+First stable public release.

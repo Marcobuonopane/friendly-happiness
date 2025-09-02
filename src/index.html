@@ -705,10 +705,19 @@
         function requestPin() {
             const pin = prompt('Inserisci il tuo PIN (6 cifre):');
             if (pin && pin.length === 6 && /^\d+$/.test(pin)) {
-                showStatus('PIN accettato', 'success');
-                return true;
+                // Verifica PIN salvato se l'utente è loggato
+                if (currentUser && currentUser.pin === pin) {
+                    showStatus('PIN accettato', 'success');
+                    return true;
+                } else if (!currentUser) {
+                    showStatus('PIN accettato', 'success');
+                    return true;
+                } else {
+                    showStatus('PIN non corretto', 'error');
+                    return false;
+                }
             } else {
-                showStatus('PIN non valido', 'error');
+                showStatus('PIN non valido (deve essere 6 cifre)', 'error');
                 return false;
             }
         }
@@ -846,10 +855,26 @@
         }
 
         // Autenticazione per certificato
-        function authenticateForCert() {
-            if (requestPin()) {
+        async function authenticateForCert() {
+            let authSuccess = false;
+            
+            if (biometricSupported) {
+                const biometricAuth = await requestBiometric();
+                if (biometricAuth) {
+                    authSuccess = true;
+                }
+            }
+            
+            if (!authSuccess) {
+                authSuccess = requestPin();
+            }
+            
+            if (authSuccess) {
                 document.getElementById('generateBtn').disabled = false;
-                showStatus('Autenticazione completata', 'success');
+                showStatus('Autenticazione completata con successo', 'success');
+            } else {
+                document.getElementById('generateBtn').disabled = true;
+                showStatus('Autenticazione fallita', 'error');
             }
         }
 
@@ -931,7 +956,36 @@
 
         // Download certificato
         function downloadCertificate() {
-            window.print();
+            const certificateElement = document.getElementById('generatedCertificate');
+            const certificateContent = certificateElement.innerHTML;
+            
+            // Crea un nuovo documento per il PDF
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Certificato AUTENTICO</title>
+                    <style>
+                        body { font-family: Georgia, serif; margin: 20px; }
+                        .certificate { border: 3px solid #8b4513; padding: 30px; border-radius: 15px; }
+                        .certificate-header { text-align: center; margin-bottom: 25px; }
+                        .certificate-title { font-size: 2em; color: #2c1810; margin-bottom: 10px; }
+                        .certificate-content { line-height: 1.8; font-size: 1.1em; }
+                        .signature-area { margin-top: 30px; text-align: right; font-style: italic; }
+                        @media print { body { margin: 0; } }
+                    </style>
+                </head>
+                <body>
+                    ${certificateContent}
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+            setTimeout(() => {
+                printWindow.print();
+                printWindow.close();
+            }, 250);
         }
 
         // Crittografia AES-256 per file
@@ -1010,6 +1064,32 @@
             showStatus(`${files.length} file caricati e crittografati nella cassaforte`, 'success');
         }
 
+        // Visualizzazione certificato
+        function displayCertificate(cert) {
+            const content = `
+                <p><strong>Certificato N°:</strong> ${cert.number}</p>
+                <p><strong>Nome:</strong> ${cert.user.fullName}</p>
+                <p><strong>Data di Nascita:</strong> ${cert.user.birthDate}</p>
+                <p><strong>Luogo di Nascita:</strong> ${cert.user.birthPlace}</p>
+                <p><strong>Email:</strong> ${cert.user.email}</p>
+                <p><strong>Posizione GPS:</strong> ${cert.gps}</p>
+                <p><strong>Orario Locale:</strong> ${cert.localTime} del ${new Date().toLocaleDateString()}</p>
+                <p><strong>Orario Internet (UTC):</strong> ${cert.internetTime}</p>
+                <p><strong>Scopo:</strong> ${cert.purpose}</p>
+                <p><strong>Timestamp ISO:</strong> ${cert.timestamp}</p>
+            `;
+            
+            document.getElementById('certificateContent').innerHTML = content;
+            document.getElementById('certificateHash').textContent = cert.hash;
+            document.getElementById('generatedCertificate').classList.remove('hidden');
+            
+            // Nascondi sezioni
+            const sections = ['loginSection', 'registrationSection', 'dashboard', 'certificationSection', 'vaultSection'];
+            sections.forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+        }
+
         async function downloadFile(index) {
             if (!currentUser || !vaultFiles[index]) {
                 showStatus('File non trovato', 'error');
@@ -1029,7 +1109,9 @@
                 const a = document.createElement('a');
                 a.href = url;
                 a.download = file.name;
+                document.body.appendChild(a);
                 a.click();
+                document.body.removeChild(a);
                 URL.revokeObjectURL(url);
                 
                 showStatus('File scaricato con successo', 'success');
@@ -1045,10 +1127,21 @@
             const savedFiles = localStorage.getItem('vaultFiles_' + currentUser.id);
             if (savedFiles) {
                 vaultFiles = JSON.parse(savedFiles);
+            } else {
+                vaultFiles = [];
             }
             
             const fileList = document.getElementById('fileList');
             fileList.innerHTML = '<h3 data-translate="stored_files">File Memorizzati:</h3>';
+            
+            if (vaultFiles.length === 0) {
+                const emptyMessage = document.createElement('p');
+                emptyMessage.textContent = 'Nessun file nella cassaforte';
+                emptyMessage.style.fontStyle = 'italic';
+                emptyMessage.style.color = '#666';
+                fileList.appendChild(emptyMessage);
+                return;
+            }
             
             vaultFiles.forEach((file, index) => {
                 const fileItem = document.createElement('div');
@@ -1056,8 +1149,8 @@
                 fileItem.innerHTML = `
                     <span>📄 ${file.name} (${(file.size / 1024).toFixed(2)} KB) 🔒</span>
                     <div>
-                        <button class="btn" onclick="downloadFile(${index})">⬇️ Scarica</button>
-                        <button class="btn" onclick="removeFile(${index})">🗑️ Rimuovi</button>
+                        <button class="btn" onclick="downloadFile(${index})" style="font-size: 12px; padding: 5px 10px;">⬇️ Scarica</button>
+                        <button class="btn" onclick="removeFile(${index})" style="font-size: 12px; padding: 5px 10px; background: #dc3545;">🗑️ Rimuovi</button>
                     </div>
                 `;
                 fileList.appendChild(fileItem);
@@ -1065,10 +1158,22 @@
         }
 
         function removeFile(index) {
-            vaultFiles.splice(index, 1);
-            localStorage.setItem('vaultFiles_' + currentUser.id, JSON.stringify(vaultFiles));
-            loadVaultFiles();
-            showStatus('File rimosso dalla cassaforte', 'info');
+            if (confirm('Sei sicuro di voler rimuovere questo file dalla cassaforte?')) {
+                vaultFiles.splice(index, 1);
+                localStorage.setItem('vaultFiles_' + currentUser.id, JSON.stringify(vaultFiles));
+                loadVaultFiles();
+                showStatus('File rimosso dalla cassaforte', 'info');
+            }
+        }
+
+        // Aggiornamento info certificazione
+        function updateCertificationInfo() {
+            if (!currentUser) return;
+            
+            certificateCounter++;
+            const certNumber = currentUser.id.toString().padStart(8, '0') + '-' + certificateCounter.toString().padStart(4, '0');
+            document.getElementById('certNumber').textContent = certNumber;
+            localStorage.setItem('certificateCounter', certificateCounter.toString());
         }
 
         // Gestione messaggi di stato
@@ -1114,12 +1219,4 @@
     </script>
 </body>
 </html>
-    <script id="html_badge_script1">
-        window.__genspark_remove_badge_link = "https://www.genspark.ai/api/html_badge/" +
-            "remove_badge?token=To%2FBnjzloZ3UfQdcSaYfDpxsYc8NJD1ocwnehtsvC%2F2fWpBYO6Gg%2FgqNsh%2F7olUJy3Yft1%2FHaDmIHcsXTkiJb%2Ft7S3X9bnhizQqFn6fbhWa8H1rHAW7W%2Bfj9kxWAn2Y4v6DRZ6iilWxoDvc%2FpL%2BvbMbmmBTAfVJE%2BrS1E6sdbf%2F64rPFFt0ew8PFm1YGw1TYmNCEkNDM95BCpRbqKMmZ6fI7groCWFivFDjm3ATaZOrI3Prph7lwsBDqOawBipPQpjGHa9qKmSG7D3VnpiZrQgzV4%2Br9WMqSW8a2XccYl8IR3UrJsiSxFQ2m06%2B417TLjMrkJjh9K6NXueHIAu5iBHld7GwdQUrmt%2F71tO916fo6ziHa9Gg86gd%2F2VyL0hcciVWw9jGvGRCr2MCxS8Ra1vmRnkcg7sZhwhNHYsNu%2BDuX70EfKiWn4KgUszgv0u%2BLwiqYKRafy1%2BEkBjS2Qf%2BSneqOZjQnxRBFuSuaZB%2BxueQS9r6ArwNEiflSK%2FJWN8WVPXZEbQSGzEpqMLh8AT1hA%3D%3D";
-        window.__genspark_locale = "it-IT";
-        window.__genspark_token = "To/BnjzloZ3UfQdcSaYfDpxsYc8NJD1ocwnehtsvC/2fWpBYO6Gg/gqNsh/7olUJy3Yft1/HaDmIHcsXTkiJb/t7S3X9bnhizQqFn6fbhWa8H1rHAW7W+fj9kxWAn2Y4v6DRZ6iilWxoDvc/pL+vbMbmmBTAfVJE+rS1E6sdbf/64rPFFt0ew8PFm1YGw1TYmNCEkNDM95BCpRbqKMmZ6fI7groCWFivFDjm3ATaZOrI3Prph7lwsBDqOawBipPQpjGHa9qKmSG7D3VnpiZrQgzV4+r9WMqSW8a2XccYl8IR3UrJsiSxFQ2m06+417TLjMrkJjh9K6NXueHIAu5iBHld7GwdQUrmt/71tO916fo6ziHa9Gg86gd/2VyL0hcciVWw9jGvGRCr2MCxS8Ra1vmRnkcg7sZhwhNHYsNu+DuX70EfKiWn4KgUszgv0u+LwiqYKRafy1+EkBjS2Qf+SneqOZjQnxRBFuSuaZB+xueQS9r6ArwNEiflSK/JWN8WVPXZEbQSGzEpqMLh8AT1hA==";
-    </script>
-    
-    <script id="html_notice_dialog_script" src="https://www.genspark.ai/notice_dialog.js"></script>
     
