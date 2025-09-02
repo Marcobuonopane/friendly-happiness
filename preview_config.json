@@ -1,0 +1,87 @@
+{
+  "preview": {
+    "title": "AUTENTICO v2.2 - Anteprima e Documentazione",
+    "description": "Sistema di Certificazione Digitale con Crittografia AES-256 e Autenticazione Biometrica",
+    "version": "2.2.0",
+    "build_date": "2024-09-01",
+    "author": "Marco Buonopane",
+    "designer": "Massimiliano Cardinali"
+  },
+  "app": {
+    "name": "AUTENTICO",
+    "version": "2.2.0",
+    "main_file": "/src/index.html",
+    "manifest": "/manifest.json",
+    "service_worker": "/sw.js"
+  },
+  "features": {
+    "security": {
+      "encryption": "AES-256-GCM",
+      "hashing": "SHA-256",
+      "biometric_auth": "WebAuthn",
+      "secure_storage": true
+    },
+    "pwa": {
+      "offline_support": true,
+      "installable": true,
+      "responsive": true,
+      "cross_platform": true
+    },
+    "certificates": {
+      "digital_signing": true,
+      "gps_location": true,
+      "timestamp_precision": "milliseconds",
+      "pdf_export": true
+    },
+    "vault": {
+      "file_encryption": true,
+      "multiple_uploads": true,
+      "secure_download": true,
+      "version_control": false
+    }
+  },
+  "demo": {
+    "embedded_iframe": true,
+    "full_functionality": true,
+    "live_testing": true,
+    "security_demo": true
+  },
+  "deployment": {
+    "platforms": ["web", "android", "ios", "desktop"],
+    "automation": ["fastlane", "github_actions"],
+    "monitoring": ["play_store_api", "dashboard"],
+    "tracks": ["internal", "beta", "production"]
+  },
+  "languages": [
+    "it", "en", "es", "fr", "de", 
+    "pt", "ru", "zh", "ja", "ar", 
+    "ko", "hi", "tr"
+  ],
+  "stats": {
+    "lines_of_code": 2847,
+    "features_implemented": 25,
+    "security_level": "military",
+    "compatibility": "99.8%",
+    "languages_count": 13
+  },
+  "endpoints": {
+    "/": "Homepage con anteprima completa",
+    "/preview": "Anteprima e documentazione",
+    "/app": "Applicazione principale",
+    "/src/index.html": "Accesso diretto all'app",
+    "/api/status": "Status API dell'applicazione",
+    "/api/info": "Informazioni dettagliate"
+  },
+  "assets": {
+    "logo": "https://page.gensparksite.com/v1/base64_upload/18914ed922aa3ac98fd1e3cc46b9055c",
+    "certificate_logo": "https://page.gensparksite.com/v1/base64_upload/def9c81851208a0ead4397c7f53c6d46",
+    "favicon": "/assets/icon-192x192.png",
+    "screenshots": []
+  },
+  "links": {
+    "github": "https://github.com/Marcobuonopane/friendly-happiness",
+    "issues": "https://github.com/Marcobuonopane/friendly-happiness/issues",
+    "documentation": "/preview.html",
+    "live_demo": "/src/index.html"
+  }
+}

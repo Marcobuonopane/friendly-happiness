@@ -5,7 +5,9 @@
   "main": "index.html",
   "scripts": {
     "start": "python3 -m http.server 8000",
+    "preview": "python3 -m http.server 3000",
     "dev": "python3 -m http.server 8080",
+    "serve": "python3 -m http.server 3000",
     "build": "node build/build.js",
     "build:android": "node scripts/auto-build-playstore.js",
     "deploy:internal": "./scripts/deploy-playstore.sh internal",
@@ -21,6 +23,8 @@
     "status:playstore": "./scripts/monitor-playstore.sh status",
     "generate:links": "node scripts/generate-store-links.js",
     "dashboard:playstore": "python3 -m http.server 8080 --directory scripts",
+    "demo": "python3 -m http.server 5000",
+    "build:preview": "echo 'Building preview...'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
