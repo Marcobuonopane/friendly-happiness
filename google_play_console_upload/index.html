@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📁 AUTENTICO v2.2 - Google Play Console Files</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            color: #666;
+            text-transform: uppercase;
+        }
+        
+        .folders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .folder-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .folder-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-color: #667eea;
+        }
+        
+        .folder-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        
+        .folder-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .folder-desc {
+            font-size: 0.95em;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .folder-files {
+            font-size: 0.85em;
+            color: #667eea;
+            font-weight: 500;
+        }
+        
+        .folder-actions {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #5a6fd8;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        
+        .quick-actions {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .quick-actions h3 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .quick-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .alert {
+            background: #d4edda;
+            color: #155724;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #28a745;
+        }
+        
+        .mobile-note {
+            background: #cce7ff;
+            color: #004085;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .folders-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .quick-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+        
+        .file-explorer {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #dee2e6;
+        }
+        
+        .file-item {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .file-item:last-child {
+            border-bottom: none;
+        }
+        
+        .file-name {
+            flex: 1;
+            font-size: 0.9em;
+        }
+        
+        .file-size {
+            font-size: 0.8em;
+            color: #666;
+            margin-left: 10px;
+        }
+        
+        .download-link {
+            color: #667eea;
+            text-decoration: none;
+            margin-left: 10px;
+            font-size: 0.8em;
+        }
+        
+        .download-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📁 AUTENTICO v2.2</h1>
+            <p>File Manager per Google Play Console</p>
+            
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number">37</div>
+                    <div class="stat-label">File Totali</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">9</div>
+                    <div class="stat-label">Cartelle</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">1.1MB</div>
+                    <div class="stat-label">Dimensione</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mobile-note">
+            📱 <strong>Accesso Mobile/Desktop:</strong> Clicca sulle cartelle per navigare e scaricare i file direttamente sul tuo dispositivo!
+        </div>
+        
+        <div class="alert">
+            🎯 <strong>Pronto per Google Play Console!</strong> Tutti i file sono organizzati e pronti per il drag & drop su Google Play Console. Segui la guida MASTER_UPLOAD_GUIDE.md per il processo completo.
+        </div>
+        
+        <div class="quick-actions">
+            <h3>⚡ Azioni Rapide</h3>
+            <div class="quick-buttons">
+                <a href="MASTER_UPLOAD_GUIDE.md" class="btn btn-primary" target="_blank">
+                    📖 Guida Upload Completa
+                </a>
+                <a href="VALIDATION_CHECKLIST.md" class="btn btn-secondary" target="_blank">
+                    ✅ Checklist Validazione
+                </a>
+                <button onclick="downloadAll()" class="btn btn-primary">
+                    📦 Download Tutto (ZIP)
+                </button>
+                <button onclick="shareLink()" class="btn btn-secondary">
+                    🔗 Condividi Link
+                </button>
+            </div>
+        </div>
+        
+        <div class="folders-grid">
+            <!-- App Bundle -->
+            <div class="folder-card" onclick="openFolder('app_bundle')">
+                <div class="folder-icon">📱</div>
+                <div class="folder-title">App Bundle</div>
+                <div class="folder-desc">File .aab per upload su Google Play Console. Questo è il file principale dell'app Android.</div>
+                <div class="folder-files">📄 1 file AAB + README</div>
+                <div class="folder-actions">
+                    <button onclick="event.stopPropagation(); downloadFile('app_bundle/com.marcobuonopane.autentico-2.2.0.aab')" class="btn btn-primary">
+                        ⬇️ Scarica AAB
+                    </button>
+                </div>
+            </div>
+            
+            <!-- App Icon -->
+            <div class="folder-card" onclick="openFolder('app_icon')">
+                <div class="folder-icon">🎨</div>
+                <div class="folder-title">Icona App</div>
+                <div class="folder-desc">Icona 512x512 per Google Play Store + varianti per diverse risoluzioni Android.</div>
+                <div class="folder-files">🖼️ 6 icone PNG + README</div>
+                <div class="folder-actions">
+                    <button onclick="event.stopPropagation(); downloadFile('app_icon/app_icon_512.png')" class="btn btn-primary">
+                        ⬇️ Icona Principale
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Feature Graphic -->
+            <div class="folder-card" onclick="openFolder('feature_graphic')">
+                <div class="folder-icon">🖼️</div>
+                <div class="folder-title">Feature Graphic</div>
+                <div class="folder-desc">Grafica promozionale 1024x500 per la vetrina di Google Play Store.</div>
+                <div class="folder-files">🎨 1 grafica PNG + README</div>
+                <div class="folder-actions">
+                    <button onclick="event.stopPropagation(); downloadFile('feature_graphic/feature_graphic_1024x500.png')" class="btn btn-primary">
+                        ⬇️ Scarica Grafica
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Screenshots -->
+            <div class="folder-card" onclick="openFolder('screenshots')">
+                <div class="folder-icon">📸</div>
+                <div class="folder-title">Screenshots</div>
+                <div class="folder-desc">Screenshot per phone, tablet 7" e tablet 10" dell'interfaccia AUTENTICO.</div>
+                <div class="folder-files">📱 9 screenshot PNG + README</div>
+                <div class="folder-actions">
+                    <button onclick="event.stopPropagation(); downloadFolder('screenshots')" class="btn btn-primary">
+                        ⬇️ Tutti Screenshot
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Store Listing -->
+            <div class="folder-card" onclick="openFolder('store_listing')">
+                <div class="folder-icon">📝</div>
+                <div class="folder-title">Store Listing</div>
+                <div class="folder-desc">Testi per Google Play: titolo app, descrizione breve e completa ottimizzate per ASO.</div>
+                <div class="folder-files">📄 3 file testo + README</div>
+                <div class="folder-actions">
+                    <button onclick="event.stopPropagation(); viewText('store_listing')" class="btn btn-primary">
+                        👁️ Visualizza Testi
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Privacy Policy -->
+            <div class="folder-card" onclick="openFolder('privacy_policy')">
+                <div class="folder-icon">🔒</div>
+                <div class="folder-title">Privacy Policy</div>
+                <div class="folder-desc">Privacy Policy conforme GDPR pubblicata online con URL per Google Play Console.</div>
+                <div class="folder-files">📄 1 HTML + 1 URL + README</div>
+                <div class="folder-actions">
+                    <button onclick="event.stopPropagation(); window.open('privacy_policy/privacy_policy.html', '_blank')" class="btn btn-primary">
+                        👁️ Visualizza Policy
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Release Notes -->
+            <div class="folder-card" onclick="openFolder('release_notes')">
+                <div class="folder-icon">📋</div>
+                <div class="folder-title">Release Notes</div>
+                <div class="folder-desc">Note di rilascio in italiano e inglese per la versione AUTENTICO v2.2.</div>
+                <div class="folder-files">📄 2 file testo + README</div>
+                <div class="folder-actions">
+                    <button onclick="event.stopPropagation(); viewText('release_notes')" class="btn btn-primary">
+                        👁️ Visualizza Note
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Metadata -->
+            <div class="folder-card" onclick="openFolder('metadata')">
+                <div class="folder-icon">⚙️</div>
+                <div class="folder-title">Metadata</div>
+                <div class="folder-desc">Metadati app: categoria (Business), content rating e informazioni aggiuntive.</div>
+                <div class="folder-files">📄 2 file config + README</div>
+                <div class="folder-actions">
+                    <button onclick="event.stopPropagation(); viewText('metadata')" class="btn btn-primary">
+                        👁️ Visualizza Info
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Content Rating -->
+            <div class="folder-card" onclick="openFolder('content_rating')">
+                <div class="folder-icon">🏷️</div>
+                <div class="folder-title">Content Rating</div>
+                <div class="folder-desc">Guida completa per compilare il questionario content rating di Google Play Console.</div>
+                <div class="folder-files">📄 1 guida README</div>
+                <div class="folder-actions">
+                    <button onclick="event.stopPropagation(); window.open('content_rating/README.md', '_blank')" class="btn btn-primary">
+                        📖 Leggi Guida
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- File Explorer Dynamic -->
+        <div id="fileExplorer" class="file-explorer" style="display: none;">
+            <h4 id="explorerTitle">File nella cartella:</h4>
+            <div id="fileList"></div>
+        </div>
+    </div>
+    
+    <script>
+        // Struttura file system simulata
+        const fileSystem = {
+            'app_bundle': [
+                { name: 'com.marcobuonopane.autentico-2.2.0.aab', size: '6.3 KB', type: 'aab' },
+                { name: 'README.md', size: '532 B', type: 'md' }
+            ],
+            'app_icon': [
+                { name: 'app_icon_512.png', size: '45 KB', type: 'png', featured: true },
+                { name: 'app_icon_192.png', size: '12 KB', type: 'png' },
+                { name: 'app_icon_144.png', size: '8 KB', type: 'png' },
+                { name: 'app_icon_96.png', size: '5 KB', type: 'png' },
+                { name: 'app_icon_72.png', size: '4 KB', type: 'png' },
+                { name: 'app_icon_48.png', size: '3 KB', type: 'png' },
+                { name: 'README.md', size: '768 B', type: 'md' }
+            ],
+            'feature_graphic': [
+                { name: 'feature_graphic_1024x500.png', size: '85 KB', type: 'png', featured: true },
+                { name: 'README.md', size: '889 B', type: 'md' }
+            ],
+            'screenshots': [
+                { name: 'phone/01_login_biometrico.png', size: '125 KB', type: 'png' },
+                { name: 'phone/02_registrazione.png', size: '118 KB', type: 'png' },
+                { name: 'phone/03_dashboard.png', size: '102 KB', type: 'png' },
+                { name: 'phone/04_certificato.png', size: '134 KB', type: 'png' },
+                { name: 'phone/05_cassaforte.png', size: '115 KB', type: 'png' },
+                { name: 'tablet_7_inch/01_tablet_7_overview.png', size: '145 KB', type: 'png' },
+                { name: 'tablet_7_inch/02_tablet_7_certificati.png', size: '138 KB', type: 'png' },
+                { name: 'tablet_10_inch/01_tablet_10_overview.png', size: '165 KB', type: 'png' },
+                { name: 'tablet_10_inch/02_tablet_10_professional.png', size: '158 KB', type: 'png' },
+                { name: 'README.md', size: '1.1 KB', type: 'md' }
+            ],
+            'store_listing': [
+                { name: 'app_title.txt', size: '35 B', type: 'txt', featured: true },
+                { name: 'short_description.txt', size: '124 B', type: 'txt', featured: true },
+                { name: 'full_description.txt', size: '3.3 KB', type: 'txt', featured: true },
+                { name: 'README.md', size: '1.2 KB', type: 'md' }
+            ],
+            'privacy_policy': [
+                { name: 'privacy_policy.html', size: '9.9 KB', type: 'html', featured: true },
+                { name: 'privacy_policy_url.txt', size: '113 B', type: 'txt', featured: true },
+                { name: 'README.md', size: '1.5 KB', type: 'md' }
+            ],
+            'release_notes': [
+                { name: 'release_notes_it.txt', size: '943 B', type: 'txt', featured: true },
+                { name: 'release_notes_en.txt', size: '876 B', type: 'txt', featured: true },
+                { name: 'README.md', size: '1.5 KB', type: 'md' }
+            ],
+            'metadata': [
+                { name: 'app_category.txt', size: '8 B', type: 'txt' },
+                { name: 'content_rating.txt', size: '5 B', type: 'txt' },
+                { name: 'README.md', size: '1.1 KB', type: 'md' }
+            ],
+            'content_rating': [
+                { name: 'README.md', size: '2.4 KB', type: 'md', featured: true }
+            ]
+        };
+        
+        function openFolder(folderName) {
+            const explorer = document.getElementById('fileExplorer');
+            const title = document.getElementById('explorerTitle');
+            const fileList = document.getElementById('fileList');
+            
+            title.textContent = `📁 File nella cartella: ${folderName}`;
+            
+            const files = fileSystem[folderName] || [];
+            fileList.innerHTML = '';
+            
+            files.forEach(file => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                
+                const fileIcon = getFileIcon(file.type);
+                const featuredBadge = file.featured ? ' ⭐' : '';
+                
+                fileItem.innerHTML = `
+                    <span class="file-name">${fileIcon} ${file.name}${featuredBadge}</span>
+                    <span class="file-size">${file.size}</span>
+                    <a href="${folderName}/${file.name}" class="download-link" download>⬇️</a>
+                `;
+                
+                fileList.appendChild(fileItem);
+            });
+            
+            explorer.style.display = 'block';
+            explorer.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function getFileIcon(type) {
+            const icons = {
+                'aab': '📱',
+                'png': '🖼️',
+                'txt': '📄',
+                'md': '📖',
+                'html': '🌐'
+            };
+            return icons[type] || '📄';
+        }
+        
+        function downloadFile(filePath) {
+            const link = document.createElement('a');
+            link.href = filePath;
+            link.download = filePath.split('/').pop();
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+        
+        function downloadFolder(folderName) {
+            alert(`📦 Per scaricare tutti i file della cartella "${folderName}", clicca sui singoli file nel file explorer qui sotto.`);
+            openFolder(folderName);
+        }
+        
+        function viewText(folderName) {
+            const textFolders = {
+                'store_listing': [
+                    'store_listing/app_title.txt',
+                    'store_listing/short_description.txt', 
+                    'store_listing/full_description.txt'
+                ],
+                'release_notes': [
+                    'release_notes/release_notes_it.txt',
+                    'release_notes/release_notes_en.txt'
+                ],
+                'metadata': [
+                    'metadata/app_category.txt',
+                    'metadata/content_rating.txt'
+                ]
+            };
+            
+            const files = textFolders[folderName] || [];
+            
+            if (files.length > 0) {
+                files.forEach(file => {
+                    window.open(file, '_blank');
+                });
+            } else {
+                openFolder(folderName);
+            }
+        }
+        
+        function downloadAll() {
+            alert('📦 Per scaricare tutti i file, usa il comando:\n\nzip -r autentico_google_play_files.zip google_play_console_upload/\n\nOppure scarica le singole cartelle cliccando su di esse.');
+        }
+        
+        function shareLink() {
+            const currentUrl = window.location.href;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'AUTENTICO v2.2 - Google Play Console Files',
+                    text: 'File per Google Play Console dell\'app AUTENTICO v2.2',
+                    url: currentUrl
+                });
+            } else {
+                // Fallback: copia negli appunti
+                navigator.clipboard.writeText(currentUrl).then(() => {
+                    alert('🔗 Link copiato negli appunti!\\n\\n' + currentUrl);
+                });
+            }
+        }
+        
+        // Mostra informazioni di caricamento
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📁 File Manager AUTENTICO v2.2 caricato');
+            console.log('📱 Ottimizzato per mobile e desktop');
+            console.log('🚀 Pronto per Google Play Console');
+        });
+    </script>
+</body>
+</html>
